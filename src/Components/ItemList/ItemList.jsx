@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import products from '../../Utils/products'
-import sell from '../../Utils/gProducts'
+import gProducts from '../../Utils/gProducts'
 import { Link } from "react-router-dom"
 import { useContext } from 'react'
 

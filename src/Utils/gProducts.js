@@ -10,8 +10,3 @@ const gProducts = () => new Promise((resolve,reject)=>{
   });
 export default gProducts
 
-const gDetails = () => new Promise ((resolve,reject) => {
-    let condition = true;
-    if(condition){resolve(products)}
-    else{reject('Error')}
-})

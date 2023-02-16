@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import gProducts, { gDetails } from "../../Utils/gProducts"
+import gProducts from "../../Utils/gProducts"
 import ItemDetail from "../ItemDetail/ItemDetail"
 
 const DetailContainer=()=>{

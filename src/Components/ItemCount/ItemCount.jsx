@@ -12,7 +12,7 @@ const ItemCount=()=>{
                 <button style={{fontSize:'2vw'}} onClick={() => {setInitial((initial) => initial - 1); if(initial < 1){initial++;}}} type="button" className="btn btn-outline-light col-3">-</button>
             </div>
             <div className="w-100 mt-3">
-                <button type="button" className="addCart btn btn-primary w-100 rounded-pill">Agregar al Carrito</button>
+                <button type="button" onClick={()=>{alert('Agregado al carrito')}} className="addCart btn btn-primary w-100 rounded-pill">Agregar al Carrito</button>
             </div>
         </div>
     )
