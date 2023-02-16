@@ -1,19 +1,38 @@
+import { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import CartContext from '../../Context/CartContext'
 import ItemCount from '../ItemCount/ItemCount'
-const ItemDetail=()=>{
+import gProducts  from '../../Utils/gProducts'
+import products from '../../Utils/products'
+const ItemDetail = () => {
+    const {idProduct} = useParams()
+    const [product,setProduct]=useState({})
+    useEffect(()=>{
+        gProducts(idProduct)
+        .then((ans)=>setProduct(ans.find(product => product.id == idProduct)))
+        .catch((err)=>console.error(err))
+    },[])
+    // useEffect(()=>{
+    //     gDetails(idProduct)
+    //     .then((ans) => setProduct(ans.find(product => product.id === idProduct)))
+    //     .catch((err)=>console.error(err))
+    // },[])
+
     return(
-        <div className="details border row rounded-4 w-100 center bg-primary">
+        <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
             <div className="images col-6">
                 <div className="m-3 p-3">
-                    <img className="w-100 h-100 rounded-4" src="https://images.fravega.com/f300/49c246f72a2baa1b8f440f95c0f9d408.jpg.webp" alt="#" />
+                    <img className="w-100 h-100 rounded-4" src={product.photo} alt="#" />
                 </div>
             </div>
-            <div className="details col-6">
-                <div className='border m-3 p-3 rounded-4'>
-                    <h3>Marca + Modelo</h3>
-                    <h3>Precio</h3>
+            <div className="col-6">
+                <div className='details m-3 p-3 rounded-4'>
+                    <h3>{product.make} {product.model}</h3>
+                    <h3 className='price'>{product.price}</h3>
                     <br />
-                    <button className="btn btn-danger w-100">Comprar</button>
-                    <ItemCount initial={1} stock={10} onAdd={()=>{}}/>
+                    <button className="btn btn-danger w-100 rounded-pill">Comprar</button>
+                    {/* <ItemCount initial={1} stock={10} onClick={()=>{onAdd={onAdd}}} /> */}
+                    <ItemCount></ItemCount>
                 </div>
             </div>
         </div>

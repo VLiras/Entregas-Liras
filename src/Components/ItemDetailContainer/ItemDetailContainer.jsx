@@ -1,22 +1,14 @@
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import gProducts, { gDetails } from "../../Utils/gProducts"
 import ItemDetail from "../ItemDetail/ItemDetail"
 
 const DetailContainer=()=>{
-const {idProduct}=useParams()
-console.log(idProduct)
-//sell(idProducto){}
-    const inputHandler=(event)=>{
-        event.preventDefault()
-        event.stopPropagation()
-        console.log(event.key)
-    }
-
-
+// console.log(idProduct)
+    
+    
     return(
-        <div className="border">
-            <ItemDetail/>
-            {/* <input onClick={inputHandler} type={Text} className='text-light'/> */}
-        </div>
+        <div className="mt-5 p-3 bg-success"><ItemDetail/></div>
     )
 }
 export default DetailContainer

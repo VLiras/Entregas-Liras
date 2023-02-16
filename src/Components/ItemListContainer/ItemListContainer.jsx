@@ -1,9 +1,9 @@
 import { useEffect,useState } from "react"
 import ItemList from "../ItemList/ItemList"
-import sell from "../../Utils/Loading"
 import products from "../../Utils/products"
 import Spinner from "react-bootstrap/Spinner"
 import { useParams } from "react-router-dom"
+import gProducts from "../../Utils/gProducts"
 //map () => Nuevo array de igual tamaño, pero transformado
 //key => Id 
 
@@ -11,23 +11,19 @@ const ItemListContainer=(props)=>{
     const [products,setProducts]=useState([])
     const[loading,setLoading]=useState(true)
     const {idCategory} = useParams()
-    console.log(idCategory)
     useEffect(()=>{
         if(idCategory){
-            sell()
+            gProducts()
             .then((ans)=>setProducts(ans.filter(product => product.category == idCategory)))
             .catch((err)=>console.log(err))
             .finally(()=>setLoading(false))
         }
         else{
-            sell()
+            gProducts()
             .then((ans)=>setProducts(ans))
             .catch((err)=>console.log(err))
             .finally(()=>setLoading(false))
         }
-
-
-        
     },[idCategory])
     
     return(
@@ -36,7 +32,7 @@ const ItemListContainer=(props)=>{
                 <h1>{props.greeting}</h1>
                 <h2>{props.subtitle}</h2>
             </div>
-            <div className="row rounded-4 bg-primary p-1">
+            <div className="listContainer row rounded-4 p-1">
             {
             loading ?
                 <Spinner animation="border" role="status" className="center">

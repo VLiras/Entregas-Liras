@@ -1,11 +1,14 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import products from '../../Utils/products'
-import sell from '../../Utils/Loading'
+import sell from '../../Utils/gProducts'
 import { Link } from "react-router-dom"
+import { useContext } from 'react'
+
 const ItemList=(props)=>{
+            
     return(
-        <div className="itemList mt-5 p-2 center col-3">
+        <div className="itemList mt-5 p-2 center col-4">
             <Card className="card rounded-4 w-100 h-100">
                 <Card.Img variant="top" className='image rounded-4' src={props.photo} />
                 <Card.Body className='text-start'>

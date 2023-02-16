@@ -1,7 +1,13 @@
 const clase9=()=>{
-    
+    const inputHandler=(event)=>{
+        event.preventDefault()
+        event.stopPropagation()
+        console.log(event.key)
+    }
     
     return(
-        <div></div>
+        <div>
+             {/* <input onClick={inputHandler} type={Text} className='text-light'/> */}
+        </div>
     )
 }

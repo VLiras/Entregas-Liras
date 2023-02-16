@@ -1,19 +1,18 @@
 import { useState } from "react";
+import products from "../../Utils/products";
 
-const ItemCount=({initial,stock,onAdd})=>{
-    // initial=1;
-    // const [initial,setInitial]=useState(0)
-       
-    
+const ItemCount=()=>{
+     const [initial,setInitial]=useState(1)
+     
     return(
-        <div className="rounded-3 border mt-5 p-3">
+        <div className="rounded-3 border mt-5 mb-3 p-3">
             <div style={{margin:'0 auto'}} className="cant row w-100 mt-2">
-                <button onClick={(initial)=>{initial+=1;console.log(initial);}} type="button" className="btn btn-outline-light col-3">+</button>
-                <article className="stock col-6"><h3>{/*initial*/}1</h3></article>
-                <button type="button" className="btn btn-outline-light col-3">-</button>
+                <button style={{fontSize:'2vw'}} onClick={() => {setInitial((initial) => initial + 1)}} type="button" className="btn btn-outline-light col-3">+</button>
+                <article className="stock col-6"><h3>{initial}</h3></article>
+                <button style={{fontSize:'2vw'}} onClick={() => {setInitial((initial) => initial - 1); if(initial < 1){initial++;}}} type="button" className="btn btn-outline-light col-3">-</button>
             </div>
-            <div className="w-100 mt-2">
-                <button type="button" className="btn btn-primary addCart w-100">Agregar al Carrito</button>
+            <div className="w-100 mt-3">
+                <button type="button" className="addCart btn btn-primary w-100 rounded-pill">Agregar al Carrito</button>
             </div>
         </div>
     )

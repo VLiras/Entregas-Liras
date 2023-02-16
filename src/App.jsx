@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import './Tools.css'
@@ -16,14 +16,16 @@ import CartContainer from './Components/CartContainer/CartContainer'
 import products from './Utils/products'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer.jsx'
 import ItemList from './Components/ItemList/ItemList'
-
+import CartContext, { CartProvider } from './Context/CartContext'
 
 function App() {
   const [count, setCount] = useState(0)
-
-  // Clase 8 => Minuto 1:44:40
+  const AppContext = createContext();
+  
   return (
+    
     <BrowserRouter>
+    <CartProvider>
       <Header/>
       <NavBar/>
       <Routes>
@@ -33,8 +35,8 @@ function App() {
         <Route path='/cart'element={<CartContainer/>}/>
         <Route path='*'element={<Navigate to='/'/>}/>
       </Routes>
-      {/* <ItemCount initial={1} stock={10} onAdd={()=>{}}/> */}
-        {/* <ItemDetail/> */}
+      {/* <ItemDetail/> */}
+      </CartProvider>
     </BrowserRouter>
     
   )
