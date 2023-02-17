@@ -18,8 +18,6 @@ function Header(){
             <div className="first col-3"><Link to='/' className="text-light">DeepAudio</Link></div>
             <div className="col-6"><Search/></div>
             <div className="col-3 border">
-                
-                {/* <LogIn/> */}
                 <User/>
             </div>
         </div>

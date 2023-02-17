@@ -1,9 +1,10 @@
 const User = ()=>{
     return(
-        <div className="user center border">
-            <section className="w-100 h-100 rounded-circle border"><i className="fa-regular fa-circle-user"></i></section>
+        <div className="user center border border-warning">
+            <div className="rounded-circle w-100 h-100 border border-primary">
+                <i className="fa-solid fa-user"></i>
+            </div>
         </div>
-
     )
 }
 export default User

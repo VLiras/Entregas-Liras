@@ -10,27 +10,34 @@ const ItemDetail = () => {
     const [loading,setLoading]=useState(true)
     useEffect(()=>{
         gProducts(idProduct)
-        .then((ans)=>setProduct(ans.find(product => product.id == idProduct)))
-        .catch((err)=>console.error(err))
+        .then(ans => setProduct(ans))
+        .catch(err=>console.error(err))
         .finally(()=>setLoading(false))
     },[])
-
+    function onAdd (cant){
+        console.log(product)
+        // addCart()
+    }
     
     return(
               
             <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
                 <div className="images col-6">
-                    <div className="m-3 p-3">
-                        <img className="w-100 h-100 rounded-4" src={product.photo} alt="#" />
+                    <div>
+                        <div className='p-3'><img className="w-100 h-100 rounded-4" src={product.photo} alt="image" /></div>
                     </div>
                 </div>
                 <div className="col-6">
                     <div className='details m-3 p-3 rounded-4'>
-                        <h3>{product.make} {product.model}</h3>
-                        <h3 className='price'>{product.price}</h3>
+                        <div>
+                            <h2>{product.make} {product.model}</h2>
+                            <h3 className='price'>{product.price}</h3>
+                            <p style={{fontSize:'1.5rem'}} className='stock'>Disponibles: {product.stock} Unidades</p>
+                        </div>
                         <br />
-                        {/* <ItemCount initial={1} stock={10} onClick={()=>{onAdd={onAdd}}} /> */}
-                        <ItemCount></ItemCount>
+                        <div>
+                            <ItemCount initial={1} stock={10} onAdd={onAdd} />   
+                        </div>
                     </div>
                 </div>
             </div>

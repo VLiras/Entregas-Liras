@@ -33,6 +33,6 @@ h2{font-weight: 200;}
 
 .navs{font-size: 2vw;} 
 .detailBlock{background-color: blue;}
-.details{background-color: #111;}
+.details{background-color: #111;height: 95%;}
 .price{color: crimson;font-size: 3rem;}
 .listContainer{background-color: #333;}
