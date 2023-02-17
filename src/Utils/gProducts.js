@@ -4,7 +4,7 @@ const gProducts = () => new Promise((resolve,reject)=>{
     if(condition){
         setInterval(()=>{
             resolve(products)
-        },3000)
+        },2000)
     }
     else{reject('Error')}  
   });
