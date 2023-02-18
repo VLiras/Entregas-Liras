@@ -22,17 +22,14 @@ function NavBar(){
     //      </div>
     // </nav>
 
-    <Navbar bg="dark" expand="lg">
+    <Navbar bg="dark" expand="lg" className="navBar">
         <Container>
             <Navbar.Collapse id="basic-navbar-nav" className="h-100">
                 <Nav className="w-100 row">
                     <NavLink to='/minicomponentes' className="navs text-light col-3">Minicomponentes</NavLink>
                     <NavLink to='/torres' className="navs text-light col-3">Torres</NavLink>
                     <NavLink to='/auriculares' className="navs text-light col-3">Auriculares</NavLink>
-                    {/* <Nav.Dropdown href="#link" title='Marcas' className="text-light">
-                        <NavDropdown.Item href="#"></NavDropdown.Item>
-                    </Nav.Dropdown> */}
-                 <Link to='/cart' href="#link" className="navs text-light col-3"><Cart/></Link>                       
+                    <Link to='/cart' href="#link" className="navs text-light col-3 "><Cart/></Link>                       
                 </Nav>
             </Navbar.Collapse>
         </Container>
