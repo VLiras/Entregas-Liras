@@ -16,9 +16,14 @@ const ItemDetail = () => {
         .finally(()=>setLoading(false))
     },[])
     function onAdd (amount){
-        addToCart({...product,amount}) //... => Despliegue
+        // addToCart({...product,amount}) //... => Despliegue
+        // console.log('2')
+        // console.log(product)
+        alert('Soy un alert en onAdd')
     }
     console.log("Cartlist:" ,cartList)
+    // console.log(onAdd)
+    
     return(
             <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
                 <div className="images col-6">

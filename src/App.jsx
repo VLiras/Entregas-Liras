@@ -21,7 +21,8 @@ import CartContext, { CartProvider } from './Context/CartContext'
 function App() {
   const [count, setCount] = useState(0)
   const AppContext = createContext();
-  
+  //Solucionar el carrito, problemas en: => ItemDetail e ItemCount
+
   return (
     
     <BrowserRouter>
