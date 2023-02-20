@@ -2,10 +2,10 @@ import { createContext, useContext, useState } from "react";
 // children => Cuando un componente envuelve a otros, y lo inyecta en la prop "children"
 
 export const CartContext = createContext([]);
-export const useCartContext = () => {
-   return useContext(CartContext)
-}
-
+// export const useCartContext = () => {
+//    return useContext(CartContext)
+// }
+export default CartContext
 
 // Funcion para no repetir el Producto
 

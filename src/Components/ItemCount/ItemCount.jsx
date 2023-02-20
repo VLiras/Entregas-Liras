@@ -3,12 +3,11 @@ import products from "../../Utils/products";
 
 const ItemCount=(onAdd)=>{
      const [count,setCount]=useState(1)
-    console.log(count) 
     const add =(props)=>{
         setCount(count => count+1)
-        if(count >10){count--}
+        if(count > 10){count--}
      }
-    const rest =()=>{
+    const rest = () => {
         setCount(count => count-1)
         if(count < 1){count++}
     }
@@ -21,7 +20,7 @@ const ItemCount=(onAdd)=>{
             </div>
             <div className="w-100 mt-3">
                 <button className="btn btn-danger w-100 rounded-pill mt-2 mb-2">Comprar</button>
-                <button type="button" onClick={()=>onAdd(2)} className="addCart btn btn-primary w-100 rounded-pill mt-2 mb-2">Agregar al Carrito</button>
+                <button type="button" onClick={()=>onAdd()} className="addCart btn btn-primary w-100 rounded-pill mt-2 mb-2">Agregar al Carrito</button>
             </div>
         </div>
     )

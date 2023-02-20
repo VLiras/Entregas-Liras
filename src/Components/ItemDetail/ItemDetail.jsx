@@ -1,6 +1,6 @@
 import { useEffect, useState,useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import useCartContext  from '../../Context/CartContext'
+import useCartContext, { CartContext }  from '../../Context/CartContext'
 import ItemCount from '../ItemCount/ItemCount'
 import gProducts  from '../../Utils/gProducts'
 import products from '../../Utils/products'
@@ -8,7 +8,7 @@ const ItemDetail = () => {
     const {idProduct} = useParams()
     const [product,setProduct]=useState({})
     const [loading,setLoading]=useState(true)
-    const {addToCart,cartList} = useCartContext()
+    const {addToCart,cartList} = useContext(CartContext)
     useEffect(()=>{
         gProducts(idProduct)
         .then(ans => setProduct(ans))
@@ -20,7 +20,6 @@ const ItemDetail = () => {
     }
     console.log("Cartlist:" ,cartList)
     return(
-              
             <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
                 <div className="images col-6">
                     <div>
