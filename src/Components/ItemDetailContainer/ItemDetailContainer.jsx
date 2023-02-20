@@ -8,7 +8,8 @@ const DetailContainer=()=>{
     
     
     return(
-        <div className="mt-5 p-3 bg-success"><ItemDetail/></div>
+        <div className="mt-5 p-3 bg-success"><ItemDetail/><p>Charging</p></div>
+        
     )
 }
 export default DetailContainer
