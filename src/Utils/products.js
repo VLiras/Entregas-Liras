@@ -18,9 +18,10 @@ export default products
 //     let condition = false
 //     if (condition) {resolve(prodts)} 
 //     else {reject('Mal')}
-    
 // })Instanciar una promesa (en realidad, un OBJETO) //res & rej
 
-
-      
+//Repositorio en GitHub
+// git remote add origin https://github.com/VLiras/Entregas-Liras.git
+// git branch -M main
+// git push -u origin main
 

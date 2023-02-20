@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import CartContext from '../../Context/CartContext'
+import useCartContext  from '../../Context/CartContext'
 import ItemCount from '../ItemCount/ItemCount'
 import gProducts  from '../../Utils/gProducts'
 import products from '../../Utils/products'
@@ -8,17 +8,17 @@ const ItemDetail = () => {
     const {idProduct} = useParams()
     const [product,setProduct]=useState({})
     const [loading,setLoading]=useState(true)
+    const {addToCart,cartList} = useCartContext()
     useEffect(()=>{
         gProducts(idProduct)
         .then(ans => setProduct(ans))
         .catch(err=>console.error(err))
         .finally(()=>setLoading(false))
     },[])
-    function onAdd (cant){
-        console.log(product)
-        // addCart()
+    function onAdd (amount){
+        addToCart({...product,amount}) //... => Despliegue
     }
-    
+    console.log("Cartlist:" ,cartList)
     return(
               
             <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">

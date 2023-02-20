@@ -1,7 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useContext } from 'react'
 import Badge from 'react-bootstrap/Badge'
-import CartContext from '../../Context/CartContext'
+import { useContext } from "react"
+import { CartContext } from '../../Context/CartContext'
+
 function Cart(){
     const {cartList} = useContext(CartContext)
     return(
