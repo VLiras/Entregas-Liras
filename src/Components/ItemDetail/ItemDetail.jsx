@@ -1,5 +1,5 @@
 import { useEffect, useState,useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useCartContext, { CartContext }  from '../../Context/CartContext'
 import ItemCount from '../ItemCount/ItemCount'
 import gProducts  from '../../Utils/gProducts'
@@ -8,6 +8,7 @@ const ItemDetail = () => {
     const {idProduct} = useParams()
     const [product,setProduct]=useState({})
     const [loading,setLoading]=useState(true)
+    const [isCount,setIsCount] = useState(true)
     const {addToCart,cartList} = useContext(CartContext)
     useEffect(()=>{
         gProducts(idProduct)
@@ -40,7 +41,10 @@ const ItemDetail = () => {
                         </div>
                         <br />
                         <div>
-                            <ItemCount initial={1} stock={10} onAdd={onAdd} />   
+                            {isCount ? <ItemCount initial={1} stock={10} onAdd={onAdd} />
+                             : <Link to="/cart"><button className='btn btn-primary'>Ir al Carrito</button></Link>
+                            }
+                               
                         </div>
                     </div>
                 </div>
