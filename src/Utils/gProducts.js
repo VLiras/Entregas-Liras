@@ -3,7 +3,7 @@ const gProducts = (id) => new Promise((resolve,reject)=>{
     let condition=true;
     if(condition){
         setInterval(()=>{
-            resolve(id ? products.find(product => id == product.id) : products)
+            resolve(id ? products.find(product => id === product.id) : products)
         },2000)
     }
     else{reject('Error')}  

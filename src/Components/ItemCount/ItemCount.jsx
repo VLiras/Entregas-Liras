@@ -5,11 +5,9 @@ const ItemCount=({stock, onAdd})=>{
      const [count,setCount]=useState(1)
     const add =(props)=>{
         setCount(count => count+1)
-        if(count > 10){count--}
-     }
+    }
     const rest = () => {
         setCount(count => count-1)
-        if(count < 1){count++}
     }
     return(
         <div className="rounded-3 border mt-3 mb-3 p-3">

@@ -29,14 +29,13 @@ function App() {
     <CartProvider>
       <Header/>
       <NavBar/>
-      <Routes>
-        <Route path='/' element={<ItemListContainer greeting="Bienvenido a Deep Audio" subtitle="Agudos, Graves, Medios...La alta fidelidad la encontras acá!"/>}/>
-        <Route path='/:idCategory'element={<ItemListContainer/>}/>
-        <Route path='/detalle/:idProduct' element={<DetailContainer/>}/>
-        <Route path='/cart'element={<CartContainer/>}/>
-        <Route path='*'element={<Navigate to='/'/>}/>
-      </Routes>
-      {/* <ItemDetail/> */}
+        <Routes>
+          <Route path='/' element={<ItemListContainer greeting="Bienvenido a Deep Audio" subtitle="Agudos, Graves, Medios...La alta fidelidad la encontras acá!"/>}/>
+          <Route path='/:idCategory'element={<ItemListContainer/>}/>
+          <Route path='/detalle/:idProduct' element={<DetailContainer/>}/>
+          <Route path='/cart'element={<CartContainer/>}/>
+          <Route path='*'element={<Navigate to='/'/>}/>
+        </Routes>
       </CartProvider>
     </BrowserRouter>
     

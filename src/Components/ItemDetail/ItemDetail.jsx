@@ -7,22 +7,21 @@ import products from '../../Utils/products'
 const ItemDetail = () => {
     const {idProduct} = useParams()
     const [product,setProduct]=useState({})
-    const [loading,setLoading]=useState(true)
-    const [isCount,setIsCount] = useState(true)
+    // const [loading,setLoading]=useState(true)
+    // const [isCount,setIsCount] = useState(true) => Clase 11
     const {addToCart,cartList} = useContext(CartContext)
-    useEffect(()=>{
+    
+    useEffect(() => {
         gProducts(idProduct)
         .then(ans => setProduct(ans))
-        .catch(err=>console.error(err))
-        .finally(()=>setLoading(false))
+               
     },[])
-    function onAdd (amount){
-        // addToCart({...product,amount}) //... => Despliegue
-        // console.log('2')
-        // console.log(product)
-        alert('Soy un alert en onAdd')
-    }
     console.log("Cartlist:" ,cartList)
+    const onAdd = (cant = 2) => {
+        console.log(cant)
+        console.log(product)
+    }
+
     // console.log(onAdd)
     
     return(
@@ -41,10 +40,10 @@ const ItemDetail = () => {
                         </div>
                         <br />
                         <div>
-                            {isCount ? <ItemCount initial={1} stock={10} onAdd={onAdd} />
+                            <ItemCount initial={1} stock={10} onAdd={onAdd} />                             
+                            {/* {isCount ? <ItemCount initial={1} stock={10} onAdd={onAdd} />
                              : <Link to="/cart"><button className='btn btn-primary'>Ir al Carrito</button></Link>
-                            }
-                               
+                            } */}
                         </div>
                     </div>
                 </div>
