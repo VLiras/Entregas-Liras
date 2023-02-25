@@ -12,6 +12,7 @@ const ItemDetail = () => {
     const {addToCart,cartList} = useCartContext()
     
     useEffect(() => {
+        console.log('hola')
         gProducts(idProduct)
         .then(ans => setProduct(ans))
                
@@ -19,8 +20,8 @@ const ItemDetail = () => {
     console.log("Cartlist:" ,cartList)
     const onAdd = (cant) => {
         console.log(cant)
-        console.log(product)
         addToCart({ ...product, cant })
+        console.warn(product)
     }
             
     return(

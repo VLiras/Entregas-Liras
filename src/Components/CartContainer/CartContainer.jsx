@@ -16,7 +16,14 @@ const CartContainer = () => {
                 //         <p>{productCart.amount}</p>
                 //     </div>
                 // ))
-
+                cartList.map(prodCart => (
+                    <label key={prodCart.id}>
+                        <img src={prodCart.photo} alt="algo" />
+                        {/* <label>{prodCart.make}</label> */}
+                        {/* <label>Cantidad {prodCart.cant} </label> */}
+                        {/* <label>Precio: {prodCart.price} </label> */}
+                    </label>
+                ))
             }
             <button type="button" onClick={cleanCart}>Vaciar Carrito</button>
         </div>
