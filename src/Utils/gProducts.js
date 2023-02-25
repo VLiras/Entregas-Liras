@@ -10,3 +10,10 @@ const gProducts = (id) => new Promise((resolve,reject)=>{
   });
 export default gProducts
 
+/*
+{ {product.photo} }
+{product.make} {product.model}
+{product.price}
+{product.stock}
+
+*/

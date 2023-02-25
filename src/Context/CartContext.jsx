@@ -1,16 +1,21 @@
 import { createContext, useContext, useState } from "react";
 // children => Cuando un componente envuelve a otros, y lo inyecta en la prop "children"
 //"..." => TODO lo que yo tenga en cartList + el producto
-export const CartContext = createContext([]);
-export default CartContext
+const CartContext = createContext([]);
+export const useCartContext = () => {
+   return useContext(CartContext)
+}
 // Falta Funcion para no repetir el Producto
 //CartProvider = CartContextProvider
-export const CartProvider = ({children}) =>{
+export const CartProvider = ({children}) => {
     //Estados y funciones globales
     const [cartList,setCartList] = useState([])
     
     const addToCart = (product) => {
-        setCartList(product)
+        setCartList([
+            ...cartList,
+            product
+        ])
     }
     const cleanCart = () =>{
         setCartList([])

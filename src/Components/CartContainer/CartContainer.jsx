@@ -1,9 +1,8 @@
-// import useCartContext from "../../Context/CartContext"
-import { useContext } from "react"
-import { CartContext } from "../../Context/CartContext"
+import { useCartContext } from "../../Context/CartContext"
 import products from "../../Utils/products"
 const CartContainer = () => {
-    const {cartList,cleanCart} = useContext(CartContext) // => Listado de productos
+    const {cartList,cleanCart} = useCartContext()
+    // => Listado de productos
     
     return(
         <div className="cartContainer border mt-4 mb-4 rounded-4 w-100">
@@ -17,6 +16,7 @@ const CartContainer = () => {
                 //         <p>{productCart.amount}</p>
                 //     </div>
                 // ))
+
             }
             <button type="button" onClick={cleanCart}>Vaciar Carrito</button>
         </div>

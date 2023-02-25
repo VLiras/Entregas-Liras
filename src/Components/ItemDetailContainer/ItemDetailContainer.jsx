@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import CartContext from "../../Context/CartContext"
 import gProducts from "../../Utils/gProducts"
 import ItemDetail from "../ItemDetail/ItemDetail"
+import { useCartContext } from "../../Context/CartContext"
 
 const DetailContainer=()=>{
 // console.log(idProduct)

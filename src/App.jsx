@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import './Tools.css'
@@ -16,7 +16,7 @@ import CartContainer from './Components/CartContainer/CartContainer'
 import products from './Utils/products'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer.jsx'
 import ItemList from './Components/ItemList/ItemList'
-import CartContext, { CartProvider } from './Context/CartContext'
+import { CartProvider,useCartContext } from './Context/CartContext'
 
 function App() {
   const [count, setCount] = useState(0)

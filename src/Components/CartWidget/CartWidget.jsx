@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Badge from 'react-bootstrap/Badge'
-import { useContext } from "react"
-import { CartContext } from '../../Context/CartContext'
+import { useCartContext } from '../../Context/CartContext'
 
 function Cart(){
-    const {cartList} = useContext(CartContext)
+    const {cartList} = useCartContext()
     return(
         <div className="cart text-light w-50">
             <i style={{fontSize:'2vw'}} className="fa-solid fa-cart-shopping p-1">
