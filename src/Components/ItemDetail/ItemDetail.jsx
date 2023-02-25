@@ -21,7 +21,7 @@ const ItemDetail = () => {
     const onAdd = (cant) => {
         console.log(cant)
         addToCart({ ...product, cant })
-        console.warn(product)
+        // console.warn(product)
     }
             
     return(

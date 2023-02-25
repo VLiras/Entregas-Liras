@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import products from "../Utils/products";
 // children => Cuando un componente envuelve a otros, y lo inyecta en la prop "children"
 //"..." => TODO lo que yo tenga en cartList + el producto
 const CartContext = createContext([]);
@@ -12,13 +13,13 @@ export const CartProvider = ({children}) => {
     const [cartList,setCartList] = useState([])
     
     const addToCart = (product) => {
-        console.log(product)
-        setCartList([
+        console.warn(product)
+        setCartList( [
             ...cartList,
             product
-        ])
+        ] )
     }
-    const cleanCart = () =>{
+    const cleanCart = () => {
         setCartList([])
     }
 
