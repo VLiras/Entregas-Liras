@@ -1,5 +1,5 @@
 import products from "./products"
-const gProducts = (id) => new Promise((resolve,reject)=>{
+const gProducts = (id) => new Promise((resolve,reject) => {
     let condition=true;
     if(condition){
         setInterval(()=>{

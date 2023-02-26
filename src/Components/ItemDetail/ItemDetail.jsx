@@ -1,37 +1,35 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import ItemCount from '../ItemCount/ItemCount'
 import gProducts  from '../../Utils/gProducts'
 import products from '../../Utils/products'
 import { useCartContext } from '../../Context/CartContext'
 const ItemDetail = () => {
-    const {idProduct} = useParams()
     const [product,setProduct]=useState({})
+    const {idProduct} = useParams()
+    const {addToCart} = useCartContext()
     const [loading,setLoading]=useState(true)
     // const [isCount,setIsCount] = useState(true) => Clase 11
-    const {addToCart,cartList} = useCartContext()
-    
+        
     useEffect(() => {
-        console.log('hola')
         gProducts(idProduct)
-        .then(ans => setProduct(ans))
+        .then(answer => setProduct(answer))
+        .catch(err => setProduct(err))
                
     },[])
-    console.log("Cartlist:" ,cartList)
+    // console.log("Cartlist:" ,cartList)
     const onAdd = (cant) => {
         console.log(cant)
         addToCart({ ...product, cant })
-        // console.warn(product)
     }
-            
+    console.warn(product) 
     return(
             <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
                 <div className="images col-6">
                     <div>
-                        <div className='p-3'><img className="w-100 h-100 rounded-4" src='#' alt="image" /></div>
+                        <div className='p-3'><img className="w-100 h-100 rounded-4" src="#" alt="image" /></div>
                     </div>
                 </div>
-                
                 <div className="col-6">
                     <div className='details m-3 p-3 rounded-4'>
                         <div>

@@ -5,7 +5,7 @@ import gProducts from '../../Utils/gProducts'
 import { Link } from "react-router-dom"
 import { useContext } from 'react'
 
-
+// After Minuto 31 => Crear componente Item
 const ItemList=(props)=>{
             
     return(

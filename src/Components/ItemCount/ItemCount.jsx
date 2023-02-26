@@ -1,13 +1,17 @@
 import { useState,useContext } from "react";
 import products from "../../Utils/products";
 
-const ItemCount=({stock, onAdd})=>{
-     const [count,setCount]=useState(1)
-    const add =(props)=>{
-        setCount(count => count+1)
+const ItemCount=({initial,stock, onAdd})=>{
+    const [count,setCount]=useState(initial)
+    const add = (props) => {
+        if (count < stock) {
+            setCount(count+1)    
+        }
     }
     const rest = () => {
-        setCount(count => count-1)
+        if (count > initial) {
+            setCount(count-1)    
+        }
     }
     return(
         <div className="rounded-3 border mt-3 mb-3 p-3">
@@ -18,7 +22,7 @@ const ItemCount=({stock, onAdd})=>{
             </div>
             <div className="w-100 mt-3">
                 <button className="btn btn-danger w-100 rounded-pill mt-2 mb-2">Comprar</button>
-                <button type="button" onClick={()=>{onAdd(2)}} className="addCart btn btn-primary w-100 rounded-pill mt-2 mb-2">Agregar al Carrito</button>
+                <button type="button" onClick={()=>{onAdd(count)}} className="addCart btn btn-primary w-100 rounded-pill mt-2 mb-2">Agregar al Carrito</button>
             </div>
         </div>
     )

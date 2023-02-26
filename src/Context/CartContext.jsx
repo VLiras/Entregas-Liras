@@ -7,13 +7,11 @@ export const useCartContext = () => {
    return useContext(CartContext)
 }
 // Falta Funcion para no repetir el Producto
-//CartProvider = CartContextProvider
 export const CartProvider = ({children}) => {
     //Estados y funciones globales
     const [cartList,setCartList] = useState([])
     
     const addToCart = (product) => {
-        console.warn(product)
         setCartList( [
             ...cartList,
             product
