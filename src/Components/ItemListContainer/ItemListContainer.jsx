@@ -49,8 +49,9 @@ const ItemListContainer=(props)=>{
             const db = getFirestore()
             const queryCollection = collection(db,'Products')
             const filtro = query(queryCollection,where('price','==',150),
-            limit(1),
-            orderBy('price','desc'))
+            //limit(1),
+            //orderBy('price','desc')
+            )
             // const filtro = query(queryCollection,where('category','==',idCategory))
             getDocs(filtro)
             .then(respCollection => setProducts( respCollection.docs.map(prod => ({ id:prod.id , ...prod.data()}) )))
