@@ -4,6 +4,7 @@ import ItemCount from '../ItemCount/ItemCount'
 import gProducts  from '../../Utils/gProducts'
 import products from '../../Utils/products'
 import { useCartContext } from '../../Context/CartContext'
+import Toast from 'react-bootstrap/Toast'
 const ItemDetail = () => {
     const [product,setProduct]=useState({})
     const {idProduct} = useParams()

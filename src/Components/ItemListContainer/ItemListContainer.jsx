@@ -10,6 +10,7 @@ import gProducts from "../../Utils/gProducts"
 const ItemListContainer=(props)=>{
     const [products,setProducts]=useState([])
     const[loading,setLoading]=useState(true)
+    const [boolean,setBoolean]=useState(true)
     const {idCategory} = useParams()
     useEffect(()=>{
         if(idCategory){
@@ -26,6 +27,7 @@ const ItemListContainer=(props)=>{
         }
     },[idCategory])
     
+    console.log('ItemListContainer')
     return(
         <div className="p-3 m-2">
             <div className="p-1 m-2">
@@ -40,7 +42,12 @@ const ItemListContainer=(props)=>{
                 </Spinner>
                 // <li key={product.id}>{product.marca} {product.modelo}</li>
             : 
-            products.map(product => <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>)
+            
+            products.map(product => 
+            <>
+                    <button onClick={()=>{setBoolean(!boolean)}}>Me Gusta</button>
+                    <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>
+            </>)
             }
             </div>
         </div>
