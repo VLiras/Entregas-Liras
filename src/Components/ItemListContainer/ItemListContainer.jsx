@@ -57,8 +57,14 @@ const ItemListContainer=(props)=>{
             .then(respCollection => setProducts( respCollection.docs.map(prod => ({ id:prod.id , ...prod.data()}) )))
         },[])
     
+    const handleProduct= () => {
+        setProducts([
+            ...products,
+            {id:products.length+1,name:'Nuevo Producto',price:'780',category:'auriculares'}
+        ])
+    }
 
-    console.log('ItemListContainer')
+    console.log('ItemListContainer') // => Clase 11
     return(
         <div className="p-3 m-2">
             <div className="p-1 m-2">
@@ -75,7 +81,7 @@ const ItemListContainer=(props)=>{
             : 
             products.map(product => 
             <>
-                    {/* <button onClick={()=>{setBoolean(!boolean)}}>Me Gusta</button> */}
+                    <button onClick={()=>{}}>Agregar Producto</button>
                     <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>
             </>)
             }

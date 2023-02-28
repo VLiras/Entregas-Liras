@@ -6,6 +6,8 @@ import { Link } from "react-router-dom"
 import { useContext } from 'react'
 
 // After Minuto 31 => Crear componente Item
+//memo() => memo(componente) || memo(componente,func(comparacion))
+
 const ItemList=(props)=>{
     console.log('ItemList')
     return(
