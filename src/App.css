@@ -2,9 +2,9 @@
   padding: 1rem 1rem;
   text-align: center;
   width: 100%;
-  margin-bottom: 100%;
   background-color: #111; 
   color: white;
+  height: 80rem;
 }
 body{background-color: blue;}
 .header{height: 8vw;background-color: #111;}
@@ -39,3 +39,6 @@ h2{font-weight: 200;}
 .listContainer{background-color: #333;}
 
 .cartContainer{background-color: #333;}
+.totalContainer{background-color: #111;width: 20rem;height: 8rem;margin: 0 auto;border: crimson solid 2px;}
+.total{font-size: 3vw;color: crimson;}
+.cartTitle{font-size: 5vw;color: #111;}
