@@ -12,58 +12,43 @@ const ItemListContainer=(props)=>{
     const [products,setProducts]=useState([])
     const [product,setProduct]=useState({})
     const[loading,setLoading]=useState(true)
-    const [boolean,setBoolean]=useState(true)
+    // const [boolean,setBoolean]=useState(true)
     const {idCategory} = useParams()
     // useEffect(()=>{
     //     if(idCategory){
     //         gProducts()
-    //         .then((ans)=>setProducts(ans.filter(product => product.category == idCategory)))
+    //         .then((ans) => setProducts(ans.filter(product => product.category == idCategory)))
     //         .catch((err)=>console.log(err))
     //         .finally(()=>setLoading(false))
     //     }
     //     else{
     //         gProducts()
-    //         .then((ans)=>setProducts(ans))
-    //         .catch((err)=>console.log(err))
-    //         .finally(()=>setLoading(false))
+    //         .then((ans) => setProducts(ans))
+    //         .catch((err) => console.log(err))
+    //         .finally(() => setLoading(false))
     //     }
     // },[idCategory])
-    // Acceder a un doc => ItemDetailContainer
-    // useEffect(()=>{
-    //     const db = getFirestore()
-    //     const queryDoc = doc(db,'Products','SBaWrzEZD78MBRa60eqA')
-    //     getDoc(queryDoc) // => Promise
-    //     .then(respProd => setProduct({ id:respProd.id, ...respProd.data() }) )
-    // },[])
+    useEffect(() => {
+        if (idCategory) {
+            const isFilter = getFirestore()
+            const queryCategory = collection(isFilter,'Products')
+            const filter = query(queryCategory,where('category', '==',idCategory))
+            getDocs(filter)
+            .then(ans => setProducts(ans.docs.map(product => ({id:product.id, ...product.data()}))))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
+        } 
+        else {
+            const all = getFirestore()
+            const allProducts = collection(all,'Products')
+            getDocs(allProducts)
+            .then(ans => setProducts(ans.docs.map(product => ({id:product.id, ...product.data()}))))
+            .catch(err => console.log(err))
+            .finally(() => setLoading(false))
+        }
+    },[])
 
-    //Acceder a todos los docs
-    // useEffect(()=>{
-    //     const db = getFirestore()
-    //     const queryCollection = collection(db,'Products')
-    //     getDocs(queryCollection)
-    //     .then(respCollection => setProducts( respCollection.docs.map(prod => ({ id:prod.id , ...prod.data()}) )))
-    // },[])
-
-    //Traer productos de una coleccion filtrado
-    useEffect(()=>{
-            const db = getFirestore()
-            const queryCollection = collection(db,'Products')
-            const filtro = query(queryCollection,where('price','==',150),
-            //limit(1),
-            //orderBy('price','desc')
-            )
-            // const filtro = query(queryCollection,where('category','==',idCategory))
-            getDocs(filtro)
-            .then(respCollection => setProducts( respCollection.docs.map(prod => ({ id:prod.id , ...prod.data()}) )))
-        },[])
     
-    const handleProduct= () => {
-        setProducts([
-            ...products,
-            {id:products.length+1,name:'Nuevo Producto',price:'780',category:'auriculares'}
-        ])
-    }
-
     console.log('ItemListContainer') // => Clase 11
     return(
         <div className="p-3 m-2">
@@ -79,11 +64,12 @@ const ItemListContainer=(props)=>{
                 </Spinner>
                 // <li key={product.id}>{product.marca} {product.modelo}</li>
             : 
-            products.map(product => 
-            <>
-                    <button onClick={()=>{}}>Agregar Producto</button>
-                    <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>
-            </>)
+            // products.map(product => 
+            // <>
+            //         {/* <button onClick={()=>{}}>Agregar Producto</button> */}
+            //         <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>
+            // </>)
+            <ItemList key={product.id}></ItemList>
             }
             </div>
         </div>

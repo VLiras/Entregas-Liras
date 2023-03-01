@@ -28,3 +28,9 @@ const Text = ({ condition = false }) => {
       }
       return <h3 {...props}>Ud esta logueado</h3>
   }
+  const handleProduct= () => {
+    setProducts([
+        ...products,
+        {id:products.length+1,name:'Nuevo Producto',price:'780',category:'auriculares'}
+    ])
+}

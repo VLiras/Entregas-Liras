@@ -9,7 +9,7 @@ const CartContainer = () => {
             <div style={{width:'200%'}}>
                 <Total/>
                 <h1 className="cartTitle mt-5">
-                    <i className="fa-solid fa-face-sad-tear"></i>
+                    <i className="fa-solid fa-face-sad-tear"></i><br />
                     No hay productos añadidos al Carrito!
                 </h1>
             </div><br />
@@ -22,11 +22,10 @@ const CartContainer = () => {
                 //         <p>{productCart.amount}</p>
                 //     </div>
                 // ))
-                
                 cartList.map(prodCart => (
                     <label key={prodCart.id}>
                         <img src={prodCart.photo} alt="image" />
-                        {/* <label>{prodCart.make}</label><br /> */}
+                        <label>{prodCart.make}</label><br />
                         {/* <label>Cantidad {prodCart.cant} </label><br /> */}
                         {/* <label>Precio: {prodCart.price} </label><br /> */}
                     </label>
