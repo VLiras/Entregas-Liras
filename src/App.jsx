@@ -18,6 +18,7 @@ import ItemListContainer from './Components/ItemListContainer/ItemListContainer.
 import ItemList from './Components/ItemList/ItemList'
 import { CartProvider,useCartContext } from './Context/CartContext'
 
+
 function App() {
   const [count, setCount] = useState(0)
   const AppContext = createContext();
@@ -36,7 +37,7 @@ function App() {
           <Route path='/cart'element={<CartContainer/>}/>
           <Route path='*'element={<Navigate to='/'/>}/>
         </Routes>
-      </CartProvider>
+    </CartProvider>
     </BrowserRouter>
     
   )

@@ -2,6 +2,7 @@ import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/fires
 import { useState } from "react"
 import { useCartContext } from "../../Context/CartContext"
 import products from "../../Utils/products"
+import Order from "../Form/Order"
 import Total from "../Total/Total"
 const CartContainer = () => {
     const {cartList,cleanCart} = useCartContext()
@@ -73,10 +74,9 @@ const CartContainer = () => {
                 <button type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
                 <button type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button>
             </div>
+            <br />
             <div>
-                <form>
-                    {/* Crear Formulario */}
-                </form>
+                <Order/>
             </div>
         </div>
     )
