@@ -59,14 +59,26 @@ const ItemListContainer=(props)=>{
     // },[])
     // En .docs => Estoy llamando al array de productos
     useEffect(() => {
+        if (idCategory=='minicomponentes') {
+        const db = getFirestore()
+        const bringCollection = collection(db,'Products')
+
+        const queryFilter = query(bringCollection, where('category','==', 'minicomponentes'))
+        getDocs(queryFilter)
+        .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
+        .catch(err => console.error(err))
+        .finally(() => setLoading(false))
+        } else {
         const db = getFirestore()
         const bringCollection = collection(db,'Products')
         getDocs(bringCollection)
         .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
         .catch(err => console.error(err))
-        .finally(() => setLoading(false))
-    },[])
-    
+        .finally(() => setLoading(false))    
+        }
+        
+    },[idCategory])
+    console.log(idCategory)
     return(
         <div className="p-3 m-2">
             <div className="p-1 m-2">
