@@ -9,7 +9,7 @@ import { useContext } from 'react'
 //memo() => memo(componente) || memo(componente,func(comparacion))
 
 const ItemList=(props)=>{
-    console.log('ItemList')
+    // console.log('ItemList')
     return(
         <div className="itemList mt-5 p-2 center col-4">
             <Card className="card rounded-4 w-100 h-100">

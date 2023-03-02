@@ -34,7 +34,7 @@ const ItemListContainer=(props)=>{
             const queryCategory = collection(isFilter,'Products')
             const filter = query(queryCategory,where('category', '==',idCategory))
             getDocs(filter)
-            .then(ans => setProducts(ans.docs.map(product => ({id:product.id, ...product.data()}))))
+            .then(ans => setProducts(ans.docs.map(product => ({id:product.id, ...product.data(product)}))))
             .catch(err => console.log(err))
             .finally(() => setLoading(false))
         } 
@@ -46,16 +46,16 @@ const ItemListContainer=(props)=>{
             .catch(err => console.log(err))
             .finally(() => setLoading(false))
         }
-    },[])
-
+    },[idCategory])
+    // console.log('ItemListContainer')
     
-    console.log('ItemListContainer') // => Clase 11
     return(
         <div className="p-3 m-2">
             <div className="p-1 m-2">
                 <h1>{props.greeting}</h1>
                 <h2>{props.subtitle}</h2>
             </div>
+            
             <div className="listContainer row rounded-4 p-1">
             {
             loading ?
@@ -64,12 +64,13 @@ const ItemListContainer=(props)=>{
                 </Spinner>
                 // <li key={product.id}>{product.marca} {product.modelo}</li>
             : 
+                
             // products.map(product => 
             // <>
             //         {/* <button onClick={()=>{}}>Agregar Producto</button> */}
             //         <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>
             // </>)
-            <ItemList key={product.id}></ItemList>
+             <ItemList key={product.id}></ItemList>
             }
             </div>
         </div>
