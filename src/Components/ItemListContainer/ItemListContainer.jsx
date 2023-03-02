@@ -68,7 +68,8 @@ const ItemListContainer=(props)=>{
         .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
-        } else {
+        } 
+        else {
         const db = getFirestore()
         const bringCollection = collection(db,'Products')
         getDocs(bringCollection)
