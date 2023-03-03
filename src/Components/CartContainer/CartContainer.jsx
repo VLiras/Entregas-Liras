@@ -1,12 +1,14 @@
 import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
 import { useState } from "react"
-import { Card,Button } from "react-bootstrap"
+import { Card,Button,Toast } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../Context/CartContext"
-import products from "../../Utils/products"
+// import products from "../../Utils/products"
 import Order from "../Form/Order"
 import Total from "../Total/Total"
+import NoProduct from "../NoProduct/NoProduct"
 const CartContainer = () => {
+    const [show, setShow] = useState(false);
     const {cartList,cleanCart} = useCartContext()
     // => Listado de productos
     const [id,setId] = useState([])
@@ -50,24 +52,15 @@ const CartContainer = () => {
             [e.target.name]:e.target.value
         })
     }
-    const NoProduct = () =>{
-        return(
-            <div className="col-12">
-            <h1 className="cartTitle mt-5">
-                    <i className="fa-solid fa-face-sad-tear"></i><br />
-                    No hay productos añadidos al Carrito!
-            </h1>
-            <Link to='/'><Button className="btn btn-primary"></Button></Link>
-            </div>
-        )
-    }
-    console.log(cartList)                               
+    
+    
+                                  
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
-        <div style={{margin:'0 auto'}} className="cartContainer w-100 p-0 border border-warning mt-4">
-            <div className="row border ">
+        <div className="cartContainer w-100 rounded-4 mt-4">
+            <div className="row">
             {
-                cartList.lenght === 0 ? 
+                cartList.length === 0 ? 
                 <NoProduct/>
                               
                 : 
@@ -97,13 +90,32 @@ const CartContainer = () => {
                     </div>
                 ))
             }
-                <div style={{height:'6vw'}} className="border center p-3 mt-3 col-12">
-                    <button type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
-                    <button type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button>
+                <div className="footer col-12">
+                    <div style={{height:'6vw'}} className="center p-3 mt-3">
+                        <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
+                        <button style={{margin:'0 3%'}} type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button>
+                    </div>
                 </div>
                 <br />
                 <div className="d-none">
                     <Order/>
+                </div>
+                {/* Agregar a ItemDetail */}
+                <div className="d-none position-absolute">
+                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                    <Toast.Header>
+                        <img
+                        src="holder.js/20x20?text=%20"
+                        className="rounded me-2"
+                        alt="#"
+                        />
+                        <strong className="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body>
+                        <Link to='/cart'><Button className="btn btn-primary rounded-pill">Ir al carrito</Button></Link>
+                    </Toast.Body>
+                </Toast>
                 </div>
             </div>
         </div>

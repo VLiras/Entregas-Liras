@@ -29,7 +29,7 @@ function NavBar(){
                     <NavLink to='/minicomponentes' className="navs text-light col-3">Minicomponentes</NavLink>
                     <NavLink to='/torres' className="navs text-light col-3">Torres</NavLink>
                     <NavLink to='/auriculares' className="navs text-light col-3">Auriculares</NavLink>
-                    <Link to='/cart' href="#link" className="navs text-light col-3 "><Cart/></Link>                       
+                    <Link to='/cart' href="#link" className="navs text-light col-3"><Cart/></Link>                       
                 </Nav>
             </Navbar.Collapse>
         </Container>
