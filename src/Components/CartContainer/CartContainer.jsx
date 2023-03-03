@@ -1,6 +1,7 @@
 import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
 import { useState } from "react"
 import { Card,Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import { useCartContext } from "../../Context/CartContext"
 import products from "../../Utils/products"
 import Order from "../Form/Order"
@@ -8,6 +9,7 @@ import Total from "../Total/Total"
 const CartContainer = () => {
     const {cartList,cleanCart} = useCartContext()
     // => Listado de productos
+    const [id,setId] = useState([])
     const [dataForm,setDataForm] = useState({
         name:'',
         phone:'',
@@ -26,7 +28,10 @@ const CartContainer = () => {
         addDoc(queryColection)
         .then(ans => console.log(ans))
         .catch(err => console.log(err))
-        .finally(() => {})
+        .finally(() => {
+            cleanCart()
+            setDataForm()
+        })
 
         //Actualizar un documento en firestore
         const queryDoc = doc(db,'Productos','7wAjigtpnwKfy8pT8wWD')
@@ -44,26 +49,29 @@ const CartContainer = () => {
             ...dataForm,
             [e.target.name]:e.target.value
         })
-    }     
-    console.log(cartList)                               
-    return(
-        <div className="cartContainer w-100 rounded-4 p-0 row border border-warning">
-            <div className='col-12'>
-                <Total/>
-                <h1 className="cartTitle mt-5">
+    }
+    const NoProduct = () =>{
+        return(
+            <div className="col-12">
+            <h1 className="cartTitle mt-5">
                     <i className="fa-solid fa-face-sad-tear"></i><br />
                     No hay productos añadidos al Carrito!
-                </h1>
-            </div><br />
+            </h1>
+            <Link to='/'><Button className="btn btn-primary"></Button></Link>
+            </div>
+        )
+    }
+    console.log(cartList)                               
+    return(
+        // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
+        <div style={{margin:'0 auto'}} className="cartContainer w-100 p-0 border border-warning mt-4">
+            <div className="row border ">
             {
-                // cartList.map(productCart => (
-                //     <div key={productCart.id}>
-                //         <img src={productCart.photo} />
-                //         <h3>{productCart.make} {productCart.model}</h3>
-                //         <h3>{productCart.price}</h3>
-                //         <p>{productCart.amount}</p>
-                //     </div>
-                // ))
+                cartList.lenght === 0 ? 
+                <NoProduct/>
+                              
+                : 
+                // El resto de cosas 
                 cartList.map(prodCart => (
                     // <label key={prodCart.id}>
                     //     <img src={prodCart.photo} alt="image" />
@@ -71,7 +79,7 @@ const CartContainer = () => {
                     //     <label>Cantidad {prodCart.cant} </label><br />
                     //     <label>Precio: {prodCart.price} </label><br />
                     // </label>
-                    <div className="p-3 border">
+                    <div className="col-3 p-3">
                     <Card>
                         <Card.Img variant="top" className='image rounded-4' src={prodCart.photo} />
                         <Card.Body className='text-start'>
@@ -89,13 +97,14 @@ const CartContainer = () => {
                     </div>
                 ))
             }
-            <div style={{width:'200%',height:'4rem'}} className="border center p-3 mt-3">
-                <button type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
-                <button type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button>
-            </div>
-            <br />
-            <div className="d-none">
-                <Order/>
+                <div style={{height:'6vw'}} className="border center p-3 mt-3 col-12">
+                    <button type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
+                    <button type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button>
+                </div>
+                <br />
+                <div className="d-none">
+                    <Order/>
+                </div>
             </div>
         </div>
     )

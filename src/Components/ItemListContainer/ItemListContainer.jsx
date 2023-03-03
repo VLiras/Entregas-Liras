@@ -10,7 +10,6 @@ import gProducts from "../../Utils/gProducts"
 
 const ItemListContainer=(props)=>{
     const [products,setProducts]=useState([])
-    const [product,setProduct]=useState({})
     const[loading,setLoading]=useState(true)
     // const [boolean,setBoolean]=useState(true)
     const {idCategory} = useParams()
@@ -25,25 +24,6 @@ const ItemListContainer=(props)=>{
     //         gProducts()
     //         .then((ans) => setProducts(ans))
     //         .catch((err) => console.log(err))
-    //         .finally(() => setLoading(false))
-    //     }
-    // },[idCategory])
-    // useEffect(() => {
-    //     if (idCategory) {
-    //         const isFilter = getFirestore()
-    //         const queryCategory = collection(isFilter,'Products')
-    //         const filter = query(queryCategory,where('category', '==',idCategory))
-    //         getDocs(filter)
-    //         .then(ans => setProducts(ans.docs.map(product => ({id:product.id, ...product.data(product)}))))
-    //         .catch(err => console.log(err))
-    //         .finally(() => setLoading(false))
-    //     } 
-    //     else {
-    //         const all = getFirestore()
-    //         const allProducts = collection(all,'Products')
-    //         getDocs(allProducts)
-    //         .then(ans => setProducts(ans.docs.map(product => ({id:product.id, ...product.data()}))))
-    //         .catch(err => console.log(err))
     //         .finally(() => setLoading(false))
     //     }
     // },[idCategory])
