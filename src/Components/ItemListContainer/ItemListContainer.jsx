@@ -59,11 +59,11 @@ const ItemListContainer=(props)=>{
     // },[])
     // En .docs => Estoy llamando al array de productos
     useEffect(() => {
-        if (idCategory=='minicomponentes') {
+        if (idCategory) {
         const db = getFirestore()
         const bringCollection = collection(db,'Products')
 
-        const queryFilter = query(bringCollection, where('category','==', 'minicomponentes'))
+        const queryFilter = query(bringCollection, where('category','==', idCategory))
         getDocs(queryFilter)
         .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
         .catch(err => console.error(err))

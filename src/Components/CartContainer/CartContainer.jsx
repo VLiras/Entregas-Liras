@@ -1,5 +1,6 @@
 import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
 import { useState } from "react"
+import { Card,Button } from "react-bootstrap"
 import { useCartContext } from "../../Context/CartContext"
 import products from "../../Utils/products"
 import Order from "../Form/Order"
@@ -12,9 +13,7 @@ const CartContainer = () => {
         phone:'',
         email:''
     })
-    const totalPrice = () => {
-        cartList.map((price,cant) => price = price*cant)
-    }
+    
     const createOrder = (event) => {
         event.preventDefault()
         const order = {}
@@ -27,7 +26,7 @@ const CartContainer = () => {
         addDoc(queryColection)
         .then(ans => console.log(ans))
         .catch(err => console.log(err))
-        .finally(()=>{})
+        .finally(() => {})
 
         //Actualizar un documento en firestore
         const queryDoc = doc(db,'Productos','7wAjigtpnwKfy8pT8wWD')
@@ -37,15 +36,19 @@ const CartContainer = () => {
         .then(() => console.log('Producto Actualizado'))
         .catch(err => console.error(err))
     }
+    const totalPrice = () => {
+        cartList.map((price,cant) => price = price*cant)
+    }
     const handleOnChange = (e) => {
         setDataForm({
             ...dataForm,
             [e.target.name]:e.target.value
         })
-    }                                    
+    }     
+    console.log(cartList)                               
     return(
-        <div className="cartContainer w-100 rounded-4 p-0">
-            <div style={{width:'200%'}}>
+        <div className="cartContainer w-100 rounded-4 p-0 row border border-warning">
+            <div className='col-12'>
                 <Total/>
                 <h1 className="cartTitle mt-5">
                     <i className="fa-solid fa-face-sad-tear"></i><br />
@@ -62,12 +65,28 @@ const CartContainer = () => {
                 //     </div>
                 // ))
                 cartList.map(prodCart => (
-                    <label key={prodCart.id}>
-                        <img src={prodCart.photo} alt="image" />
-                        <label>{prodCart.make}</label><br />
-                        {/* <label>Cantidad {prodCart.cant} </label><br /> */}
-                        {/* <label>Precio: {prodCart.price} </label><br /> */}
-                    </label>
+                    // <label key={prodCart.id}>
+                    //     <img src={prodCart.photo} alt="image" />
+                    //     <label>{prodCart.make}</label><br />
+                    //     <label>Cantidad {prodCart.cant} </label><br />
+                    //     <label>Precio: {prodCart.price} </label><br />
+                    // </label>
+                    <div className="p-3 border">
+                    <Card>
+                        <Card.Img variant="top" className='image rounded-4' src={prodCart.photo} />
+                        <Card.Body className='text-start'>
+                            <Card.Title className='text-center text-danger'><h2>U$S {prodCart.price}</h2></Card.Title>
+                            <Card.Text className='text-center'><h3><strong>{prodCart.make} {prodCart.model}</strong></h3></Card.Text>
+                            <Card.Text className='text-center'><h3><strong>{prodCart.cant} Unidades</strong></h3></Card.Text>
+                            <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <div style={{width:'2.5rem',height:'2.5rem'}} className="center ">
+                                <Button variant='danger' onClick={() => {}} className='delete w-100 h-100 rounded-circle text-center'>X</Button>
+                            </div>
+                        </Card.Footer>  
+                    </Card>
+                    </div>
                 ))
             }
             <div style={{width:'200%',height:'4rem'}} className="border center p-3 mt-3">
@@ -75,7 +94,7 @@ const CartContainer = () => {
                 <button type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button>
             </div>
             <br />
-            <div>
+            <div className="d-none">
                 <Order/>
             </div>
         </div>
