@@ -20,11 +20,15 @@ export const CartProvider = ({children}) => {
     const cleanCart = () => {
         setCartList([])
     }
-
+    const deleteProduct = () => {
+        // setCartList(cartList.splice())
+        alert('Producto eliminado')
+    }
+       
     return(
         <CartContext.Provider value={{
             cartList,
-            addToCart,cleanCart        
+            addToCart,cleanCart,deleteProduct       
         }}>
             {children}
         </CartContext.Provider>
