@@ -11,6 +11,7 @@ export const CartProvider = ({children}) => {
     //Estados y funciones globales
     const [cartList,setCartList] = useState([])
     
+    
     const addToCart = (product) => {
         setCartList( [
             ...cartList,
@@ -20,9 +21,10 @@ export const CartProvider = ({children}) => {
     const cleanCart = () => {
         setCartList([])
     }
+
     const deleteProduct = () => {
-        // setCartList(cartList.splice())
-        alert('Producto eliminado')
+        setCartList(cartList.splice())
+        
     }
        
     return(

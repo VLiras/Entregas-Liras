@@ -11,7 +11,7 @@ const CartContainer = () => {
     const [show, setShow] = useState(false); // => Toast
     const {cartList,cleanCart,deleteProduct} = useCartContext()
     // => Listado de productos
-    const [id,setId] = useState([])
+    // const [id,setId] = useState([])
     const [dataForm,setDataForm] = useState({
         name:'',
         phone:'',
@@ -52,7 +52,8 @@ const CartContainer = () => {
             [e.target.name]:e.target.value
         })
     }
-    console.log(cartList)                       
+    console.log(cartList) 
+    
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
@@ -81,7 +82,7 @@ const CartContainer = () => {
                         </Card.Body>
                         <Card.Footer>
                             <div style={{width:'2.5rem',height:'2.5rem'}} className="center ">
-                                <Button variant='danger' onClick={deleteProduct} className='delete w-100 h-100 rounded-circle text-center'>X</Button>
+                                <Button variant='danger' onClick={()=>{deleteProduct(prodCart.id)}} className='delete w-100 h-100 rounded-circle text-center'>X</Button>
                             </div>
                         </Card.Footer>  
                     </Card>

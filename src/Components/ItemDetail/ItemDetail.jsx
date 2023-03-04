@@ -27,6 +27,8 @@ const ItemDetail = () => {
         addToCart({ ...product, cant })
     }
      
+     
+    
     return(
             <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
                 <div className="images col-6">
