@@ -1,9 +1,10 @@
 import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
 import { useState } from "react"
-import { Card,Button,Toast } from "react-bootstrap"
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../Context/CartContext"
-// import Order from "../Form/Order"
 import Total from "../Total/Total"
 import NoProduct from "../NoProduct/NoProduct"
 const CartContainer = () => {
@@ -15,35 +16,19 @@ const CartContainer = () => {
         lastName:'',
         phone:'',
         email:''
+        // confirmEmail:''
     })
     
-    // const createOrder = (event) => {
-    //     event.preventDefault()
-    //     const order = {}
-    //     order.buyer = dataForm
-    //     order.item = cartList.map(({id,name,price}) => ({id,name,price})),    
-    //     order.total = totalPrice()
-        
-    //     const db = getFirestore()
-    //     const queryColection = collection(db,'orders')
-    //     addDoc(queryColection)
-    //     .then(ans => console.log(ans))
-    //     .catch(err => console.log(err))
-    //     .finally(() => {
-    //         cleanCart()
-    //         setDataForm()
-    //     })
     const totalPrice = () =>{
         // cartList.map((price,cant) => price = price*cant)
+        //Establecer el precio total
     }
-        
-        
-    
+     
     const createOrder = (event) => {
         event.preventDefault() // => Evito que refresque
         // Generando una orden
         const order = {}
-        order.buyer = {name:'Federico',phone:'132556356',email:'fede@gmail.com'}
+        order.buyer = dataForm
         order.item = cartList.map(({id,make,model,price}) => ({id,make,model,price})),    
         order.total = totalPrice()
         console.log(order)
@@ -51,33 +36,26 @@ const CartContainer = () => {
         // Insertar una orden
         const db = getFirestore()
         const getCollection = collection(db,'Orders') // => No existe
-        // addDoc(getCollection,order) // => Coloco el objeto que quiero añadir (en addDoc)
-        // .then(ans => console.log(ans)) 
-        // .catch(err => console.error(err))
-        // .finally(()=>{})
+        addDoc(getCollection,order) // => Coloco el objeto que quiero añadir (en addDoc)
+        .then(ans => console.log(ans)) 
+        .catch(err => console.error(err))
+        .finally(() => {
+            cleanCart()
+            setDataForm()
+        })
 
-
-        //Actualizar un documento en firestore
-
-        // const getDoc = doc(db,'Products','pKNZX9Cb0baLp89tV1Rz')
-        // updateDoc(getDoc,{
-        //     stock: 30  // => Especifico los campos que quiero modificar
-        //     // isActive:true
-        // })
-        // .then(() => console.log('Producto Actualizado'))
-        
-        
-
+        //Aqui va Actualizar un producto     
     }
+    
     // Funcion para detectar los cambios de mi formulario =>
-    const handleOnChange = (event) => {
-        // setDataForm({
-        //     ...dataForm,
-        //     [e.target.name]:e.target.value
-        // })
-        console.log(event.target.name) // => Muestra el name de los inputs
-        console.log(event.target.value) // => Captura el valor de los inputs
+    const handleChange = (event) => {
+        setDataForm({ // => Declaro el cambio de estado para modificar el valor de los inputs al cambiar el estado
+            ...dataForm,
+            [event.target.name]:event.target.value // => Le aplico una prop dinamica
+        })
     }
+    console.log(dataForm)
+    
     console.log(cartList) 
     
     return(
@@ -115,7 +93,48 @@ const CartContainer = () => {
                     </div>
                 ))
             }
-                {/* <div className="d-none"><Order/></div> */}
+                <div style={{fontSize:'2vw'}} className="order border rounded-4 bg-dark p-3 w-50 center">
+                <Form onSubmit={createOrder}>
+                    <h2>Datos del Comprador</h2><hr />
+                    <div className="row">
+                        <Form.Group className="mb-3 col-6" controlId="formName">
+                            <Form.Label>Nombre</Form.Label>
+                            <Form.Control type="text" name="name" onChange={handleChange} value={dataForm.name} placeholder="Nombre" required />
+                        </Form.Group>
+                        <Form.Group className="mb-3 col-6" controlId="formLastName">
+                            <Form.Label>Apellido</Form.Label>
+                            <Form.Control type="text" name="lastName" onChange={handleChange} value={dataForm.lastName} placeholder="Apellido" required />
+                        </Form.Group>
+                        <Form.Text className="text-muted col-12">
+                            We'll never share your email with anyone else.
+                        </Form.Text>
+                    </div>
+                    <Form.Group className="mb-3" controlId="formPassword">
+                        <Form.Label>Telefono</Form.Label>
+                        <Form.Control type="tel" name="phone" onChange={handleChange} value={dataForm.phone} className="w-75 center" placeholder="11-1234-5678" required/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formEmail">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" name="email" onChange={handleChange} value={dataForm.email} className="w-75 center" placeholder="nombre@example.com" required/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="confirmEmail">
+                        <Form.Label>Confimar Email</Form.Label>
+                        <Form.Control type="text" name="confirmEmail" className="w-75 center" required/>
+                    </Form.Group><hr/>
+                    <div className="formFooter row">
+                        <div className="col-6 p-1">
+                            <Button style={{fontSize:'1rem',width:'6rem'}} variant="danger" type="submit" className="rounded-pill">
+                            Cancelar
+                            </Button>
+                        </div>
+                        <div className="col-6 p-1">
+                            <Button style={{fontSize:'1rem',width:'6rem'}} variant="primary" onClick={() => createOrder()} type="submit" className="rounded-pill disabled">
+                             Orden
+                            </Button>
+                        </div>
+                    </div>
+                </Form>
+            </div>
                 <div className="footer col-12">
                     <div style={{height:'6vw'}} className="center p-3 mt-3">
                         <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
