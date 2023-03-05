@@ -3,54 +3,80 @@ import { useState } from "react"
 import { Card,Button,Toast } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../Context/CartContext"
-// import products from "../../Utils/products"
-import Order from "../Form/Order"
+// import Order from "../Form/Order"
 import Total from "../Total/Total"
 import NoProduct from "../NoProduct/NoProduct"
 const CartContainer = () => {
-    const [show, setShow] = useState(false); // => Toast
     const {cartList,cleanCart,deleteProduct} = useCartContext()
     // => Listado de productos
     // const [id,setId] = useState([])
     const [dataForm,setDataForm] = useState({
         name:'',
+        lastName:'',
         phone:'',
         email:''
     })
     
-    const createOrder = (event) => {
-        event.preventDefault()
-        const order = {}
-        order.buyer = dataForm
-        order.item = cartList.map(({id,name,price}) => ({id,name,price})),    
-        order.total = totalPrice()
+    // const createOrder = (event) => {
+    //     event.preventDefault()
+    //     const order = {}
+    //     order.buyer = dataForm
+    //     order.item = cartList.map(({id,name,price}) => ({id,name,price})),    
+    //     order.total = totalPrice()
         
+    //     const db = getFirestore()
+    //     const queryColection = collection(db,'orders')
+    //     addDoc(queryColection)
+    //     .then(ans => console.log(ans))
+    //     .catch(err => console.log(err))
+    //     .finally(() => {
+    //         cleanCart()
+    //         setDataForm()
+    //     })
+    const totalPrice = () =>{
+        // cartList.map((price,cant) => price = price*cant)
+    }
+        
+        
+    
+    const createOrder = (event) => {
+        event.preventDefault() // => Evito que refresque
+        // Generando una orden
+        const order = {}
+        order.buyer = {name:'Federico',phone:'132556356',email:'fede@gmail.com'}
+        order.item = cartList.map(({id,make,model,price}) => ({id,make,model,price})),    
+        order.total = totalPrice()
+        console.log(order)
+        console.log(totalPrice())
+        // Insertar una orden
         const db = getFirestore()
-        const queryColection = collection(db,'orders')
-        addDoc(queryColection)
-        .then(ans => console.log(ans))
-        .catch(err => console.log(err))
-        .finally(() => {
-            cleanCart()
-            setDataForm()
-        })
+        const getCollection = collection(db,'Orders') // => No existe
+        // addDoc(getCollection,order) // => Coloco el objeto que quiero añadir (en addDoc)
+        // .then(ans => console.log(ans)) 
+        // .catch(err => console.error(err))
+        // .finally(()=>{})
+
 
         //Actualizar un documento en firestore
-        const queryDoc = doc(db,'Productos','7wAjigtpnwKfy8pT8wWD')
-        updateDoc(queryDoc, {
-            stock:80
-        })
-        .then(() => console.log('Producto Actualizado'))
-        .catch(err => console.error(err))
+
+        // const getDoc = doc(db,'Products','pKNZX9Cb0baLp89tV1Rz')
+        // updateDoc(getDoc,{
+        //     stock: 30  // => Especifico los campos que quiero modificar
+        //     // isActive:true
+        // })
+        // .then(() => console.log('Producto Actualizado'))
+        
+        
+
     }
-    const totalPrice = () => {
-        cartList.map((price,cant) => price = price*cant)
-    }
-    const handleOnChange = (e) => {
-        setDataForm({
-            ...dataForm,
-            [e.target.name]:e.target.value
-        })
+    // Funcion para detectar los cambios de mi formulario =>
+    const handleOnChange = (event) => {
+        // setDataForm({
+        //     ...dataForm,
+        //     [e.target.name]:e.target.value
+        // })
+        console.log(event.target.name) // => Muestra el name de los inputs
+        console.log(event.target.value) // => Captura el valor de los inputs
     }
     console.log(cartList) 
     
@@ -89,33 +115,14 @@ const CartContainer = () => {
                     </div>
                 ))
             }
+                {/* <div className="d-none"><Order/></div> */}
                 <div className="footer col-12">
                     <div style={{height:'6vw'}} className="center p-3 mt-3">
                         <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
-                        <button style={{margin:'0 3%'}} type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button>
+                        {/* <button style={{margin:'0 3%'}} type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button> */}
                     </div>
                 </div>
                 <br />
-                <div className="d-none">
-                    <Order/>
-                </div>
-                {/* Agregar a ItemDetail */}
-                <div className="d-none position-absolute">
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                    <Toast.Header>
-                        <img
-                        src="holder.js/20x20?text=%20"
-                        className="rounded me-2"
-                        alt="#"
-                        />
-                        <strong className="me-auto">Bootstrap</strong>
-                        <small>11 mins ago</small>
-                    </Toast.Header>
-                    <Toast.Body>
-                        <Link to='/cart'><Button className="btn btn-primary rounded-pill">Ir al carrito</Button></Link>
-                    </Toast.Body>
-                </Toast>
-                </div>
             </div>
         </div>
     )

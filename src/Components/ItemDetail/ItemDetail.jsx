@@ -5,8 +5,11 @@ import gProducts  from '../../Utils/gProducts'
 import products from '../../Utils/products'
 import { useCartContext } from '../../Context/CartContext'
 import Toast from 'react-bootstrap/Toast'
+import Button from 'react-bootstrap/Button'
 import { doc, getDoc, getFirestore } from 'firebase/firestore'
+import { Link } from 'react-router-dom'
 const ItemDetail = () => {
+    const [show, setShow] = useState(false); // => Toast
     const [product,setProduct]=useState({})
     const {idProduct} = useParams()
     const {addToCart} = useCartContext()
@@ -30,6 +33,7 @@ const ItemDetail = () => {
      
     
     return(
+        <>
             <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
                 <div className="images col-6">
                     <div>
@@ -53,6 +57,23 @@ const ItemDetail = () => {
                     </div>
                 </div>
             </div>
+            <div className="d-none position-absolute">
+                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                    <Toast.Header>
+                        <img
+                        src="holder.js/20x20?text=%20"
+                        className="rounded me-2"
+                        alt="#"
+                        />
+                        <strong className="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                    </Toast.Header>
+                    <Toast.Body>
+                        <Link to='/cart'><Button className="btn btn-primary rounded-pill">Ir al carrito</Button></Link>
+                    </Toast.Body>
+                </Toast>
+            </div>
+        </>
     )
 }
 export default ItemDetail
