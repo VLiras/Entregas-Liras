@@ -1,10 +1,8 @@
 import { useEffect,useState } from "react"
-import {getDoc, getFirestore,doc, collection, getDocs, query, where, limit, orderBy} from 'firebase/firestore'
+import {getFirestore, collection, getDocs, query, where} from 'firebase/firestore'
 import ItemList from "../ItemList/ItemList"
-import products from "../../Utils/products"
 import Spinner from "react-bootstrap/Spinner"
 import { useParams } from "react-router-dom"
-import gProducts from "../../Utils/gProducts"
 //map () => Nuevo array de igual tamaño, pero transformado
 //key => Id 
 
@@ -42,21 +40,21 @@ const ItemListContainer=(props)=>{
         if (idCategory) {
         const db = getFirestore()
         const bringCollection = collection(db,'Products')
-
-        const queryFilter = query(bringCollection, where('category','==', idCategory))
+        console.warn(idCategory)
+        const queryFilter = idCategory ? query(bringCollection, where('category','==', idCategory)) : bringCollection
         getDocs(queryFilter)
         .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
         } 
-        else {
-        const db = getFirestore()
-        const bringCollection = collection(db,'Products')
-        getDocs(bringCollection)
-        .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
-        .catch(err => console.error(err))
-        .finally(() => setLoading(false))    
-        }
+        // else {
+        // const db = getFirestore() 
+        // const bringCollection = collection(db,'Products')
+        // getDocs(bringCollection)
+        // .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
+        // .catch(err => console.error(err))
+        // .finally(() => setLoading(false))    
+        // }
         
     },[idCategory])
     console.log(idCategory)
@@ -73,15 +71,12 @@ const ItemListContainer=(props)=>{
                 <Spinner animation="border" role="status" className="center">
                     <span className="visually-hidden">Loading...</span>
                 </Spinner>
-                // <li key={product.id}>{product.marca} {product.modelo}</li>
             : 
-                
-            products.map(product => 
-            <>
-                    {/* <button onClick={()=>{}}>Agregar Producto</button> */}
+                products.map(product => 
+                <>
                     <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>
-            </>)
-            //  <ItemList key={product.id}></ItemList>
+                    {/* <button onClick={()=>{}}>Agregar Producto</button> */}
+                </>)
             }
             </div>
         </div>

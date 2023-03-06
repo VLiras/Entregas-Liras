@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
+import { addDoc, collection, getFirestore } from "firebase/firestore"
 import { useState } from "react"
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
@@ -9,8 +9,7 @@ import Total from "../Total/Total"
 import NoProduct from "../NoProduct/NoProduct"
 const CartContainer = () => {
     const {cartList,cleanCart,deleteProduct} = useCartContext()
-    // => Listado de productos
-    // const [id,setId] = useState([])
+        // const [id,setId] = useState([])
     const [dataForm,setDataForm] = useState({
         name:'',
         lastName:'',
@@ -69,12 +68,6 @@ const CartContainer = () => {
                 : 
                 // El resto de cosas 
                 cartList.map(prodCart => (
-                    // <label key={prodCart.id}>
-                    //     <img src={prodCart.photo} alt="image" />
-                    //     <label>{prodCart.make}</label><br />
-                    //     <label>Cantidad {prodCart.cant} </label><br />
-                    //     <label>Precio: {prodCart.price} </label><br />
-                    // </label>
                     <div className="col-3 p-3">
                     <Card>
                         <Card.Img variant="top" className='image rounded-4' src={prodCart.photo} />
@@ -138,7 +131,6 @@ const CartContainer = () => {
                 <div className="footer col-12">
                     <div style={{height:'6vw'}} className="center p-3 mt-3">
                         <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
-                        {/* <button style={{margin:'0 3%'}} type="button" onClick={() => createOrder()} className="btn btn-primary rounded-pill">Generar Orden</button> */}
                     </div>
                 </div>
                 <br />

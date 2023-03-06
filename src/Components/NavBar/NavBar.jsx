@@ -10,18 +10,16 @@ import User from "../User/User"
 import Search from "../Search/SearchBar"
 // import gallery from '../NavBar/gallery.png';
 function NavBar(){
+    const categories = [
+        {id:'kdhkdhdkhdk',path:'/minicomponentes',name:'Nombre',description:'Description'}
+    ]
+    // {
+    //     categories.map(cat => 
+    //         <NavLink key={cat.id} to={cat.path} className="navs text-light col-3">{cat.description}</NavLink>
+    //         )
+    // }
     return(
-      
-    // <nav className="bar center d-none">
-    //      <div className="wrap">
-    //      <div className="navOptions"><li>Ofertas</li></div>
-    //      <div className="navOptions"><li>Publicados Recientemente</li></div>
-    //      <div className="navOptions"><li>Dispositivos</li></div>{/* => Dropdown*/}
-    //      <div className="navOptions"><li>Publicar</li></div>
-    //      <div><Cart/></div>
-    //      </div>
-    // </nav>
-
+        
     <Navbar bg="dark" expand="lg" className="navBar">
         <Container>
             <Navbar.Collapse id="basic-navbar-nav" className="h-100">
