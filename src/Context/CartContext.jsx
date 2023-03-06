@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-// children => Cuando un componente envuelve a otros, y lo inyecta en la prop "children"
-//"..." => TODO lo que yo tenga en cartList + el producto
+
+
 const CartContext = createContext([]);
 export const useCartContext = () => {
    return useContext(CartContext)
@@ -9,8 +9,6 @@ export const useCartContext = () => {
 export const CartProvider = ({children}) => {
     //Estados y funciones globales
     const [cartList,setCartList] = useState([])
-    
-    
     const addToCart = (product) => {
         setCartList( [
             ...cartList,
@@ -20,13 +18,10 @@ export const CartProvider = ({children}) => {
     const cleanCart = () => {
         setCartList([])
     }
-
     const deleteProduct = (product) => {
         setCartList(cartList.splice(product))/* Argumento */
         console.warn(product)
-        
     }
-       
     return(
         <CartContext.Provider value={{
             cartList,

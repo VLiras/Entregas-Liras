@@ -1,15 +1,9 @@
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import products from '../../Utils/products'
-import gProducts from '../../Utils/gProducts'
 import { Link } from "react-router-dom"
-import { useContext } from 'react'
-
-// After Minuto 31 => Crear componente Item
-//memo() => memo(componente) || memo(componente,func(comparacion))
+// After 3 Minuto 31 => Crear componente Item
 
 const ItemList=(props)=>{
-    // console.log('ItemList')
     return(
         <div className="itemList mt-5 p-2 center col-4">
             <Card className="card rounded-4 w-100 h-100">

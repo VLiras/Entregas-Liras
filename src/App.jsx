@@ -13,7 +13,6 @@ function App() {
   // const AppContext = createContext();
   
   return (
-    
     <BrowserRouter>
     <CartProvider>
       <Header/>
@@ -27,7 +26,6 @@ function App() {
         </Routes>
     </CartProvider>
     </BrowserRouter>
-    
   )
 }
 

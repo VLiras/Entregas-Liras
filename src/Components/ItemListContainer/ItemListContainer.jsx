@@ -3,39 +3,11 @@ import {getFirestore, collection, getDocs, query, where} from 'firebase/firestor
 import ItemList from "../ItemList/ItemList"
 import Spinner from "react-bootstrap/Spinner"
 import { useParams } from "react-router-dom"
-//map () => Nuevo array de igual tamaño, pero transformado
-//key => Id 
 
 const ItemListContainer=(props)=>{
     const [products,setProducts]=useState([])
     const[loading,setLoading]=useState(true)
-    // const [boolean,setBoolean]=useState(true)
     const {idCategory} = useParams()
-    // useEffect(()=>{
-    //     if(idCategory){
-    //         gProducts()
-    //         .then((ans) => setProducts(ans.filter(product => product.category == idCategory)))
-    //         .catch((err)=>console.log(err))
-    //         .finally(()=>setLoading(false))
-    //     }
-    //     else{
-    //         gProducts()
-    //         .then((ans) => setProducts(ans))
-    //         .catch((err) => console.log(err))
-    //         .finally(() => setLoading(false))
-    //     }
-    // },[idCategory])
-    // console.log('ItemListContainer')
-    
-    //data() => Metodo de Firestore con el cual yo puedo extraer el resto de los datos del documento
-    //Acceder a un producto
-    // useEffect(() => {
-    //     const db = getFirestore()
-    //     const bringing = doc(db,'Products','7wAjigtpnwKfy8pT8wWD')
-    //     getDoc(bringing)
-    //     .then(resp => setProduct({id: resp.id, ...resp.data()}))
-    // },[])
-    // En .docs => Estoy llamando al array de productos
     useEffect(() => {
         if (idCategory) {
         const db = getFirestore()
@@ -44,6 +16,7 @@ const ItemListContainer=(props)=>{
         const queryFilter = idCategory ? query(bringCollection, where('category','==', idCategory)) : bringCollection
         getDocs(queryFilter)
         .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
+        // En .docs => Estoy llamando al array de productos
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
         } 
