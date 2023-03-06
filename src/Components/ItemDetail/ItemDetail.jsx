@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ItemCount from '../ItemCount/ItemCount'
-import gProducts  from '../../Utils/gProducts'
 import products from '../../Utils/products'
 import { useCartContext } from '../../Context/CartContext'
 import Toast from 'react-bootstrap/Toast'
@@ -28,6 +27,7 @@ const ItemDetail = () => {
     const onAdd = (cant) => {
         console.log(cant)
         addToCart({ ...product, cant })
+        // setShow(true)
     }
      
      
@@ -57,19 +57,14 @@ const ItemDetail = () => {
                     </div>
                 </div>
             </div>
-            <div className="d-none position-absolute">
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+            <div style={{border:'white solid'}} className="toast position-absolute">
+                <Toast onClose={() => setShow(false)} show={show} delay={5000} bg='dark' autohide>
                     <Toast.Header>
-                        <img
-                        src="holder.js/20x20?text=%20"
-                        className="rounded me-2"
-                        alt="#"
-                        />
-                        <strong className="me-auto">Bootstrap</strong>
+                        <strong className="me-auto text-dark">DeepAudio</strong>
                         <small>11 mins ago</small>
                     </Toast.Header>
-                    <Toast.Body>
-                        <Link to='/cart'><Button className="btn btn-primary rounded-pill">Ir al carrito</Button></Link>
+                    <Toast.Body className='p-2'>
+                        <Link to='/cart'><Button className="btn btn-primary rounded-pill w-100">Ir al carrito</Button></Link>
                     </Toast.Body>
                 </Toast>
             </div>

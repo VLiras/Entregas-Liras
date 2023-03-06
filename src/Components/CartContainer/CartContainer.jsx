@@ -54,7 +54,7 @@ const CartContainer = () => {
             [event.target.name]:event.target.value // => Le aplico una prop dinamica
         })
     }
-    console.log(dataForm)
+    // console.log(dataForm)
     
     console.log(cartList) 
     

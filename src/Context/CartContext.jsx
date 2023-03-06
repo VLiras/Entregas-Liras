@@ -22,8 +22,9 @@ export const CartProvider = ({children}) => {
         setCartList([])
     }
 
-    const deleteProduct = () => {
-        setCartList(cartList.splice())
+    const deleteProduct = (product) => {
+        setCartList(cartList.splice(product))/* Argumento */
+        console.warn(product)
         
     }
        
