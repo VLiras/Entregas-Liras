@@ -18,7 +18,7 @@ const CartContainer = () => {
         // confirmEmail:''
     })
     
-    const totalPrice = () =>{
+    const totalPrice = () => {
         // cartList.map((price,cant) => price = price*cant)
         //Establecer el precio total
     }
@@ -128,9 +128,14 @@ const CartContainer = () => {
                     </div>
                 </Form>
             </div>
+            <hr/>
                 <div className="footer col-12">
-                    <div style={{height:'6vw'}} className="center p-3 mt-3">
+                    <div>
+                        <Total/>
+                    </div>
+                    <div style={{height:'6vw'}} id='cleanCartContainer' className="center p-3 mt-3">
                         <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
+                        <button style={{margin:'0 3%'}} type="button" className="btn btn-primary rounded-pill" onClick={() => {}}>Crear Orden</button>
                     </div>
                 </div>
                 <br />

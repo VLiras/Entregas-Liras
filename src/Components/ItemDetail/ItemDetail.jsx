@@ -27,8 +27,9 @@ const ItemDetail = () => {
         console.log(cant)
         addToCart({ ...product, cant })
         // setShow(true)
+        
     }
-     
+    
      
     
     return(
@@ -63,6 +64,7 @@ const ItemDetail = () => {
                         <small>11 mins ago</small>
                     </Toast.Header>
                     <Toast.Body className='p-2'>
+                        <h3><i className="fa-regular fa-circle-check"/>Se agrego exitosamente al carrito</h3>
                         <Link to='/cart'><Button className="btn btn-primary rounded-pill w-100">Ir al carrito</Button></Link>
                     </Toast.Body>
                 </Toast>
