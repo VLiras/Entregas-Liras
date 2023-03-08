@@ -86,7 +86,7 @@ const CartContainer = () => {
                     </div>
                 ))
             }
-                <div style={{fontSize:'2vw'}} className="order border rounded-4 bg-dark p-3 w-50 center">
+                <div className="order border rounded-4 bg-dark p-3 w-50 center d-none">
                 <Form onSubmit={createOrder}>
                     <h2>Datos del Comprador</h2><hr />
                     <div className="row">

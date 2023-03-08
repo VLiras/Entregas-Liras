@@ -33,7 +33,7 @@ const ItemDetail = () => {
     
     return(
         <>
-            <div style={{margin:'0 auto'}} className="detailBlock row rounded-4 w-100">
+            <div className="detailBlock row rounded-4 w-100 center">
                 <div className="images col-6">
                     <div>
                         <div className='p-3'><img className="w-100 h-100 rounded-4" src={product.photo} alt="image" /></div>

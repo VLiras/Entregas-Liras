@@ -19,9 +19,9 @@ export const CartProvider = ({children}) => {
         setCartList([])
     }
     const deleteProduct = (product) => {
-        setCartList(cartList.splice(product))/* Argumento */
-        console.warn(product)
+        setCartList(cartList.filter((cardItem) => cardItem.id !== product))
     }
+    
     return(
         <CartContext.Provider value={{
             cartList,

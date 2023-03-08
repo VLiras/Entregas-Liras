@@ -8,7 +8,7 @@ const gProducts = (id) => new Promise((resolve,reject) => {
     }
     else{reject('Error')}  
   });
-export default gProducts
+
 
 /*
 { {product.photo} }
