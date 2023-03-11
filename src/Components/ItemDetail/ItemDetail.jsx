@@ -22,16 +22,10 @@ const ItemDetail = () => {
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
     },[])
-    // console.log("Cartlist:" ,cartList)
     const onAdd = (cant) => {
-        console.log(cant)
         addToCart({ ...product, cant })
         // setShow(true)
-        
     }
-    
-     
-    
     return(
         <>
             <div className="detailBlock row rounded-4 w-100 center">

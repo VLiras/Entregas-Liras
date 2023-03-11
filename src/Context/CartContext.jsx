@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 
-
 const CartContext = createContext([]);
 export const useCartContext = () => {
    return useContext(CartContext)
@@ -21,7 +20,6 @@ export const CartProvider = ({children}) => {
     const deleteProduct = (product) => {
         setCartList(cartList.filter((cardItem) => cardItem.id !== product))
     }
-    
     return(
         <CartContext.Provider value={{
             cartList,

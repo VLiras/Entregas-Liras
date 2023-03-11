@@ -10,6 +10,7 @@ import NoProduct from "../NoProduct/NoProduct"
 const CartContainer = () => {
     const {cartList,cleanCart,deleteProduct} = useCartContext()
         // const [id,setId] = useState([])
+        
     const [dataForm,setDataForm] = useState({
         name:'',
         lastName:'',
@@ -17,12 +18,10 @@ const CartContainer = () => {
         email:''
         // confirmEmail:''
     })
-    
-    const totalPrice = () => {
-        // cartList.map((price,cant) => price = price*cant)
-        //Establecer el precio total
+    const totalPrice = (product) => {
+        cartList.find((price) => price === product.price)
     }
-     
+    
     const createOrder = (event) => {
         event.preventDefault() // => Evito que refresque
         // Generando una orden
@@ -55,8 +54,7 @@ const CartContainer = () => {
     }
     // console.log(dataForm)
     
-    console.log(cartList) 
-    
+        
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
@@ -133,7 +131,7 @@ const CartContainer = () => {
             <hr/>
                 <div className="footer col-12">
                     <div>
-                        <Total/>
+                        <Total totalPrice={totalPrice}/>
                     </div>
                     <div style={{height:'6vw'}} id='cleanCartContainer' className="center p-3 mt-3">
                         <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
