@@ -60,11 +60,13 @@ const CartContainer = () => {
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
-            <div className="row">
+            <div className="row h-100">
             {
-                cartList.length === 0 ? 
-                <NoProduct/>
-                              
+                cartList.length === 0 ?
+                <div style={{height:'32rem'}} className="">
+                    <NoProduct/>
+                </div> 
+                                              
                 : 
                 // El resto de cosas 
                 cartList.map(prodCart => (

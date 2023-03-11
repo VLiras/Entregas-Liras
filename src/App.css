@@ -39,10 +39,10 @@ h2{font-weight: 200;}
 .price{color: crimson;font-size: 3rem;}
 .listContainer{background-color: #333;}
 
-.cartContainer{background-color: #333;}
+.cartContainer{background-color: #333;height: 55rem;}
 .totalContainer{background-color: #111;width: 20rem;height: 8rem;margin: 0 auto;border: crimson solid 2px;}
 .total{font-size: 3vw;color: crimson;}
-.cartTitle{font-size: 5vw;color: #111;}
+.cartTitle{font-size: 5vw;color:white;}
 
 .countContainer{background-color: #333;}
 .buttonAligners{width:55%}

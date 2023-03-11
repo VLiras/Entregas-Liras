@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import  Button  from 'react-bootstrap/Button'
 const NoProduct = () => {
   return (
-        <div className="col-12">
+        <div style={{marginTop:'8rem'}} className="col-12">
             <h1 className="cartTitle mt-5">
                     <i className="fa-solid fa-face-sad-tear"/><br />
                     No hay productos añadidos al Carrito!
