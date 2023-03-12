@@ -4,40 +4,25 @@ import ItemList from "../ItemList/ItemList"
 import Spinner from "react-bootstrap/Spinner"
 import { useParams } from "react-router-dom"
 
-const ItemListContainer=(props)=>{
+const ItemListContainer = (props) => {
     const [products,setProducts]=useState([])
     const[loading,setLoading]=useState(true)
     const {idCategory} = useParams()
     useEffect(() => {
-        if (idCategory) {
         const db = getFirestore()
         const bringCollection = collection(db,'Products')
-        console.warn(idCategory)
         const queryFilter = idCategory ? query(bringCollection, where('category','==', idCategory)) : bringCollection
         getDocs(queryFilter)
-        .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
-        // En .docs => Estoy llamando al array de productos
+        .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()})))) // En .docs => Llamo al array de productos
         .catch(err => console.error(err))
         .finally(() => setLoading(false))
-        } 
-        // else {
-        // const db = getFirestore() 
-        // const bringCollection = collection(db,'Products')
-        // getDocs(bringCollection)
-        // .then(resp => setProducts(resp.docs.map(prod => ({ id: prod.id, ...prod.data()}))))
-        // .catch(err => console.error(err))
-        // .finally(() => setLoading(false))    
-        // }
-        
     },[idCategory])
-    console.log(idCategory)
     return(
         <div className="p-3 m-2">
             <div className="p-1 m-2">
                 <h1>{props.greeting}</h1>
                 <h2>{props.subtitle}</h2>
             </div>
-            
             <div className="listContainer row rounded-4 p-1">
             {
             loading ?
@@ -56,3 +41,15 @@ const ItemListContainer=(props)=>{
     )
 }
 export default ItemListContainer
+
+// Eliminar codigo repetido => Refactorizacion
+// Prohibido el codigo comentado
+// Codigo que no usemos
+// Importaciones y varibles declarados no usadas
+// Importaciones: Librerias y dependencias - Componentes - Estilos
+// Ningun console.log(first) => Salvo errores
+// No errores en la consola
+// Identar bien => Codigo alineado
+// Separar logica de componentes 
+// No mezclar idiomas
+// Corroborar funcionamiento del codigo

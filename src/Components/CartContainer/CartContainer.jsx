@@ -17,10 +17,8 @@ const CartContainer = () => {
         email:''
         // confirmEmail:''
     })
-    const totalPrice = (product) => {
-        // cartList.find((price) => price === product.price)
-    }
-    
+        
+    // Clase 13 (Firebase 2) => Minuto 1:02:00
     const createOrder = (event) => {
         event.preventDefault() // => Evito que refresque
         // Generando una orden
@@ -42,7 +40,7 @@ const CartContainer = () => {
         })
         //Aqui va Actualizar un producto     
     }
-    // Funcion para detectar los cambios de mi formulario =>
+    // Funcion para detectar los cambios de mi formulario
     const handleChange = (event) => {
         setDataForm({ 
             // => Declaro el cambio de estado para modificar el valor de los inputs al cambiar el estado
@@ -51,8 +49,7 @@ const CartContainer = () => {
         })
     }
     // console.log(dataForm)
-    console.log(cartList)
-            
+               
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
@@ -62,7 +59,6 @@ const CartContainer = () => {
                 <div style={{height:'32rem'}} className="">
                     <NoProduct/>
                 </div> 
-                                              
                 : 
                 cartList.map(prodCart => (
                     <div className="col-3 p-3">
@@ -125,13 +121,13 @@ const CartContainer = () => {
                     </Form.Group><hr/>
                     <div className="formFooter row">
                         <div className="col-6 p-1">
-                            <Button style={{fontSize:'1rem',width:'6rem'}} variant="danger" type="submit" className="rounded-pill">
+                            <Button variant="danger" type="submit" className="formButton rounded-pill">
                             Cancelar
                             </Button>
                         </div>
                         <div className="col-6 p-1">
-                            <Button style={{fontSize:'1rem',width:'6rem'}} variant="primary" onClick={() => createOrder()} type="submit" className="rounded-pill disabled">
-                             Enviar Orden
+                            <Button variant="primary" onClick={() => createOrder()} type="submit" className="formButton rounded-pill disabled">
+                             Generar Orden
                             </Button>
                         </div>
                     </div>

@@ -1,32 +1,30 @@
-import { Button } from "react-bootstrap"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
-import Form from 'react-bootstrap/Form'
-import NavDropdown from "react-bootstrap/NavDropdown"
 import { Link, NavLink } from "react-router-dom"
-import Cart from "../CartWidget/CartWidget" //Contenedor Local
-import User from "../User/User"
-import Search from "../Search/SearchBar"
-// import gallery from '../NavBar/gallery.png';
+import { collection, getDocs, getFirestore } from "firebase/firestore"
+import { useEffect, useState } from "react"
+import Cart from "../CartWidget/CartWidget"
 function NavBar(){
-    const categories = [
-        {id:'kdhkdhdkhdk',path:'/minicomponentes',name:'Nombre',description:'Description'}
-    ]
-    // {
-    //     categories.map(cat => 
-    //         <NavLink key={cat.id} to={cat.path} className="navs text-light col-3">{cat.description}</NavLink>
-    //         )
-    // }
+    const [categories,setCategories] = useState([])
+    useEffect(() => {
+    const db = getFirestore()
+    const bCategories = collection(db,'Categories')
+    getDocs(bCategories)
+    .then(ans => setCategories(ans.docs.map(category => ({name:category.name,...category.data()}))))
+    .catch(err => console.error(err))
+    .finally(() => {})
+    },[])
     return(
-        
     <Navbar bg="dark" expand="lg" className="navBar">
         <Container>
             <Navbar.Collapse id="basic-navbar-nav" className="h-100">
                 <Nav className="w-100 row">
-                    <NavLink to='/minicomponentes' className="navs text-light col-3">Minicomponentes</NavLink>
-                    <NavLink to='/torres' className="navs text-light col-3">Torres</NavLink>
-                    <NavLink to='/auriculares' className="navs text-light col-3">Auriculares</NavLink>
+                    {
+                        categories.map(cat => 
+                        <NavLink key={cat.id} to={cat.path} className="navs text-light col-3">{cat.name}</NavLink>
+                        )
+                    }
                     <Link to='/cart' href="#link" className="navs text-light col-3"><Cart/></Link>                       
                 </Nav>
             </Navbar.Collapse>

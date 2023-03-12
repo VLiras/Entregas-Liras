@@ -20,10 +20,14 @@ export const CartProvider = ({children}) => {
     const deleteProduct = (product) => {
         setCartList(cartList.filter((cardItem) => cardItem.id !== product))
     }
+    const totalPrice = () => {
+        // cartList.find((price) => price === product.price)
+        console.log('Soy Precio Total')
+    }
     return(
         <CartContext.Provider value={{
             cartList,
-            addToCart,cleanCart,deleteProduct       
+            addToCart,cleanCart,deleteProduct,totalPrice       
         }}>
             {children}
         </CartContext.Provider>
