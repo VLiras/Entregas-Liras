@@ -23,8 +23,11 @@ const ItemDetail = () => {
         .finally(() => setLoading(false))
     },[])
     const onAdd = (cant) => {
-        addToCart({ ...product, cant })
+        const precio = product.price
+        let subTotal = precio * cant
+        addToCart({ ...product, cant,subTotal })
         // setShow(true)
+        // addToCart({ ...product, cant }) => En caso de que no funcione
     }
     return(
         <>

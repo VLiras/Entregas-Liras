@@ -10,7 +10,6 @@ import NoProduct from "../NoProduct/NoProduct"
 const CartContainer = () => {
     const {cartList,cleanCart,deleteProduct} = useCartContext()
         // const [id,setId] = useState([])
-        
     const [dataForm,setDataForm] = useState({
         name:'',
         lastName:'',
@@ -19,7 +18,7 @@ const CartContainer = () => {
         // confirmEmail:''
     })
     const totalPrice = (product) => {
-        cartList.find((price) => price === product.price)
+        // cartList.find((price) => price === product.price)
     }
     
     const createOrder = (event) => {
@@ -41,20 +40,19 @@ const CartContainer = () => {
             cleanCart()
             setDataForm()
         })
-
         //Aqui va Actualizar un producto     
     }
-    
     // Funcion para detectar los cambios de mi formulario =>
     const handleChange = (event) => {
-        setDataForm({ // => Declaro el cambio de estado para modificar el valor de los inputs al cambiar el estado
+        setDataForm({ 
+            // => Declaro el cambio de estado para modificar el valor de los inputs al cambiar el estado
             ...dataForm,
             [event.target.name]:event.target.value // => Le aplico una prop dinamica
         })
     }
     // console.log(dataForm)
-    
-        
+    console.log(cartList)
+            
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
@@ -66,7 +64,6 @@ const CartContainer = () => {
                 </div> 
                                               
                 : 
-                // El resto de cosas 
                 cartList.map(prodCart => (
                     <div className="col-3 p-3">
                     <Card>
@@ -76,6 +73,7 @@ const CartContainer = () => {
                             <Card.Text className='text-center'><h3><strong>{prodCart.make} {prodCart.model}</strong></h3></Card.Text>
                             <Card.Text className='text-center'><h3><strong>{prodCart.cant} Unidades</strong></h3></Card.Text>
                             <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
+                            <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Subtotal: {prodCart.subTotal}</Card.Text>
                         </Card.Body>
                         <Card.Footer>
                             <div style={{width:'2.5rem',height:'2.5rem'}} className="center ">
@@ -86,7 +84,18 @@ const CartContainer = () => {
                     </div>
                 ))
             }
-                <div className="order border rounded-4 bg-dark p-3 w-50 center d-none">
+            <hr/>
+                <div className="footer col-12">
+                    <div>
+                        <Total/>
+                    </div>
+                    <div style={{height:'6vw'}} id='cleanCartContainer' className="center p-3 mt-3">
+                        <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
+                        {/* <button style={{margin:'0 3%'}} type="button" className="btn btn-primary rounded-pill" onClick={()=>{bucle()}}>Crear Orden</button> */}
+                    </div>
+                </div>
+                <br />
+                <div className="order border rounded-4 bg-dark p-3 w-50 center">
                 <Form onSubmit={createOrder}>
                     <h2>Datos del Comprador</h2><hr />
                     <div className="row">
@@ -122,23 +131,12 @@ const CartContainer = () => {
                         </div>
                         <div className="col-6 p-1">
                             <Button style={{fontSize:'1rem',width:'6rem'}} variant="primary" onClick={() => createOrder()} type="submit" className="rounded-pill disabled">
-                             Orden
+                             Enviar Orden
                             </Button>
                         </div>
                     </div>
                 </Form>
             </div>
-            <hr/>
-                <div className="footer col-12">
-                    <div>
-                        <Total totalPrice={totalPrice}/>
-                    </div>
-                    <div style={{height:'6vw'}} id='cleanCartContainer' className="center p-3 mt-3">
-                        <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
-                        <button style={{margin:'0 3%'}} type="button" className="btn btn-primary rounded-pill" onClick={() => {}}>Crear Orden</button>
-                    </div>
-                </div>
-                <br />
             </div>
         </div>
     )
