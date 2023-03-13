@@ -9,7 +9,6 @@ const gProducts = (id) => new Promise((resolve,reject) => {
     else{reject('Error')}  
   });
 
-
 /*
 { {product.photo} }
 {product.make} {product.model}

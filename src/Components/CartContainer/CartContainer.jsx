@@ -68,7 +68,7 @@ const CartContainer = () => {
                             <Card.Title className='text-center text-danger'><h2>U$S {prodCart.price}</h2></Card.Title>
                             <Card.Text className='text-center'><h3><strong>{prodCart.make} {prodCart.model}</strong></h3></Card.Text>
                             <Card.Text className='text-center'><h3><strong>{prodCart.cant} Unidades</strong></h3></Card.Text>
-                            <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
+                            {/* <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text> */}
                             <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Subtotal: {prodCart.subTotal}</Card.Text>
                         </Card.Body>
                         <Card.Footer>
@@ -78,6 +78,7 @@ const CartContainer = () => {
                         </Card.Footer>  
                     </Card>
                     </div>
+                                       
                 ))
             }
             <hr/>

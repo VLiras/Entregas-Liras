@@ -10,7 +10,7 @@ const ItemList=(props)=>{
                 <Card.Img variant="top" className='image rounded-4' src={props.photo} />
                 <Card.Body className='text-start'>
                     <Card.Title className='text-center'><h2>{props.price}</h2></Card.Title>
-                    <Card.Text className='text-center'><h3><strong>{props.make} {props.model}</strong></h3></Card.Text>
+                    <Card.Text style={{fontSize:'2rem'}} className='prodMake text-center'><strong>{props.make} {props.model}</strong></Card.Text>
                     <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {props.stock}</Card.Text>
                 </Card.Body>
                 <Card.Footer>
