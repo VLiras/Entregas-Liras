@@ -21,12 +21,10 @@ export const CartProvider = ({children}) => {
         setCartList(cartList.filter((cardItem) => cardItem.id !== product))
     }
     const totalPrice = () => {
-        // cartList.find((product) => console.log(product))
-        // let prices = cartList.map(prodCart => prodCart.cant*prodCart.price)
-        // let total = 0
-        // setTotal(prices.forEach((price) => {total += price;console.log(total)}))
+        let prices = cartList.map(prodCart => prodCart.cant*prodCart.price)
+        let total = 0
+        setTotal(prices.forEach((price) => {total += price;console.log(total)}))
         // setTotal(total = total + 1)
-        console.log(total)
     }
     
     return(

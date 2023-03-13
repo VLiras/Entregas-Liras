@@ -11,7 +11,7 @@ const ItemDetail = () => {
     const [show, setShow] = useState(false); // => Toast
     const [product,setProduct]=useState({})
     const {idProduct} = useParams()
-    const {addToCart} = useCartContext()
+    const {addToCart,totalPrice} = useCartContext()
     const [loading,setLoading]=useState(true)
     // const [isCount,setIsCount] = useState(true) => Clase 11
         
@@ -27,6 +27,7 @@ const ItemDetail = () => {
         const precio = product.price
         let subTotal = precio * cant
         addToCart({ ...product, cant,subTotal })
+        totalPrice()
         // setShow(true)
         // addToCart({ ...product, cant }) => En caso de que no funcione
     }

@@ -8,7 +8,7 @@ import { useCartContext } from "../../Context/CartContext"
 import Total from "../Total/Total"
 import NoProduct from "../NoProduct/NoProduct"
 const CartContainer = () => {
-    const {cartList,cleanCart,deleteProduct} = useCartContext()
+    const {cartList,cleanCart,deleteProduct,totalPrice} = useCartContext()
         // const [id,setId] = useState([])
     const [dataForm,setDataForm] = useState({
         name:'',
@@ -84,7 +84,7 @@ const CartContainer = () => {
             <hr/>
                 <div className="footer col-12">
                     <div>
-                        <Total/>
+                        <Total total={totalPrice}/>
                     </div>
                     <div style={{height:'6vw'}} id='cleanCartContainer' className="center p-3 mt-3">
                         <button style={{margin:'0 3%'}} type="button" className="btn btn-danger rounded-pill" onClick={cleanCart}>Vaciar Carrito</button>
