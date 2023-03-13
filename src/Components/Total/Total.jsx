@@ -9,7 +9,7 @@ const Total = () => {
   return (
     <div className='totalContainer rounded-4 p-3 mt-4'>
       <label role={Row} style={{fontSize:'2rem'}} className='totalPriceTitle'>Precio Total</label>
-      <h2 className='total center'>$ {}</h2>
+      <h2 className='total center'>$ {totalPrice()}</h2>
     </div>
   )
 }

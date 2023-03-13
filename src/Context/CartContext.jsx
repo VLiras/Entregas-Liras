@@ -20,13 +20,13 @@ export const CartProvider = ({children}) => {
     const deleteProduct = (product) => {
         setCartList(cartList.filter((cardItem) => cardItem.id !== product))
     }
-    const totalPrice = () => {
-        let prices = cartList.map(prodCart => prodCart.cant*prodCart.price)
-        let total = 0
-        setTotal(prices.forEach((price) => {total += price;console.log(total)}))
+    const totalPrice = () => cartList.reduce((count,product) => count += (product.cant * product.price),0 )
+        // let prices = cartList.map(prodCart => prodCart.cant*prodCart.price)
+        // let total = 0
+        // setTotal(prices.forEach((price) => {total += price;console.log(total)}))
         // setTotal(total = total + 1)
-    }
-    
+        // const precioTotal = () => cartList.reduce( (count, producto) => count += (producto.cantidad*producto.price), 0) 
+        
     return(
         <CartContext.Provider value={{
             cartList,total,
