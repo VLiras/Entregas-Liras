@@ -14,10 +14,9 @@ const CartContainer = () => {
         name:'',
         lastName:'',
         phone:'',
-        email:''
-        // confirmEmail:''
+        email:'',
+        confirmEmail:''
     })
-        
     // Clase 13 (Firebase 2) => Minuto 1:02:00
     const createOrder = (event) => {
         event.preventDefault() // => Evito que refresque
@@ -27,16 +26,26 @@ const CartContainer = () => {
         order.item = cartList.map(({id,make,model,price,cant}) => ({id,make,model,price,cant})),    
         order.total = totalPrice()
         console.log(order)
-        // Insertar una orden
-        const db = getFirestore()
-        const getCollection = collection(db,'Orders') // => No existe
-        addDoc(getCollection,order) // => Coloco el objeto que quiero añadir (en addDoc)
-        .then(ans => console.log(ans)) 
-        .catch(err => console.error(err))
-        .finally(() => {
-            cleanCart()
-            setDataForm()
-        })
+        // let correo=dataForm.email; let confirmacion= dataForm.confirmEmails
+        const validateMail = () => {
+            if(dataForm.confirmEmail != dataForm.email ){
+                
+            }
+            else{
+                // Insertar una orden
+                const db = getFirestore()
+                const getCollection = collection(db,'Orders') // => No existe
+                addDoc(getCollection,order) // => Coloco el objeto que quiero añadir (en addDoc)
+                .then(ans => console.log(ans)) 
+                .catch(err => console.error(err))
+                .finally(() => {
+                    cleanCart()
+                    setDataForm()
+                })
+            }    
+        }        
+
+        
         //Aqui va Actualizar un producto     
     }
     // Funcion para detectar los cambios de mi formulario
@@ -47,10 +56,7 @@ const CartContainer = () => {
             [event.target.name]:event.target.value // => Le aplico una prop dinamica
         })
     }
-    // console.log(dataForm)
-    const validateMail = (event) => {
-        console.log('Validando Mail...')
-    }
+            
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
@@ -105,7 +111,7 @@ const CartContainer = () => {
                             <Form.Control type="text" name="lastName" onChange={handleChange} value={dataForm.lastName} placeholder="Apellido" required />
                         </Form.Group>
                         <Form.Text className="text-muted col-12">
-                            We'll never share your email with anyone else.
+                            La informacion contenida en este formulario no sera compartida bajo ningun criterio.
                         </Form.Text>
                     </div>
                     <Form.Group className="mb-3" controlId="formPassword">
@@ -119,7 +125,7 @@ const CartContainer = () => {
                     
                     <Form.Group className="mb-3" controlId="confirmEmail">
                         <Form.Label>Confimar Email</Form.Label>
-                        <Form.Control type="text" name="confirmEmail" className="w-75 center" required/>
+                        <Form.Control type="text" name="confirmEmail" onChange={handleChange} className="w-75 center" value={dataForm.confirmEmail} required/>
                     </Form.Group><hr/>
                     <div className="formFooter row">
                         <div className="col-6 p-1">
@@ -128,7 +134,7 @@ const CartContainer = () => {
                             </Button>
                         </div>
                         <div className="col-6 p-1">
-                            <Button variant="primary" onClick={() => createOrder()} type="submit" className="formButton rounded-pill disabled">
+                            <Button variant="primary" onClick={() => createOrder()} type="submit" className="formButton rounded-pill">
                              Generar Orden
                             </Button>
                         </div>
