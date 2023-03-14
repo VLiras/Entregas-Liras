@@ -48,7 +48,9 @@ const CartContainer = () => {
         })
     }
     // console.log(dataForm)
-               
+    const validateMail = (event) => {
+        console.log('Validando Mail...')
+    }
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
