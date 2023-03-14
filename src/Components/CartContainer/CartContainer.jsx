@@ -24,10 +24,9 @@ const CartContainer = () => {
         // Generando una orden
         const order = {}
         order.buyer = dataForm
-        order.item = cartList.map(({id,make,model,price}) => ({id,make,model,price})),    
+        order.item = cartList.map(({id,make,model,price,cant}) => ({id,make,model,price,cant})),    
         order.total = totalPrice()
         console.log(order)
-        console.log(totalPrice())
         // Insertar una orden
         const db = getFirestore()
         const getCollection = collection(db,'Orders') // => No existe
@@ -68,8 +67,7 @@ const CartContainer = () => {
                             <Card.Title className='text-center text-danger'><h2>U$S {prodCart.price}</h2></Card.Title>
                             <Card.Text className='text-center'><h3><strong>{prodCart.make} {prodCart.model}</strong></h3></Card.Text>
                             <Card.Text className='text-center'><h3><strong>{prodCart.cant} Unidades</strong></h3></Card.Text>
-                            {/* <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text> */}
-                            <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Subtotal: {prodCart.subTotal}</Card.Text>
+                            <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
                         </Card.Body>
                         <Card.Footer>
                             <div style={{width:'2.5rem',height:'2.5rem'}} className="center ">
@@ -116,6 +114,7 @@ const CartContainer = () => {
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" name="email" onChange={handleChange} value={dataForm.email} className="w-75 center" placeholder="nombre@example.com" required/>
                     </Form.Group>
+                    
                     <Form.Group className="mb-3" controlId="confirmEmail">
                         <Form.Label>Confimar Email</Form.Label>
                         <Form.Control type="text" name="confirmEmail" className="w-75 center" required/>
