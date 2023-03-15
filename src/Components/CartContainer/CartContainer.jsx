@@ -3,7 +3,6 @@ import { useState } from "react"
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { Link } from "react-router-dom"
 import { useCartContext } from "../../Context/CartContext"
 import Total from "../Total/Total"
 import NoProduct from "../NoProduct/NoProduct"
@@ -19,44 +18,41 @@ const CartContainer = () => {
     })
     // Clase 13 (Firebase 2) => Minuto 1:02:00
     const createOrder = (event) => {
-        event.preventDefault() // => Evito que refresque
-        // Generando una orden
-        const order = {}
-        order.buyer = dataForm
-        order.item = cartList.map(({id,make,model,price,cant}) => ({id,make,model,price,cant})),    
-        order.total = totalPrice()
-        console.log(order)
-        // let correo=dataForm.email; let confirmacion= dataForm.confirmEmails
-        const validateMail = () => {
-            if(dataForm.confirmEmail != dataForm.email ){
-                
+        event.preventDefault() // => Evito que refresque y se borran los datos
+            if(dataForm.confirmEmail !== dataForm.email ){
+                console.warn('Los datos son distintos');
             }
             else{
+                console.log('Son Iguales')
+                // Generando una orden
+                const order = {}
+                order.buyer = dataForm
+                order.item = cartList.map(({id,make,model,price,cant}) => ({id,make,model,price,cant})),    
+                order.total = totalPrice()
+                console.log(order)
+                console.log(event)
                 // Insertar una orden
                 const db = getFirestore()
                 const getCollection = collection(db,'Orders') // => No existe
-                addDoc(getCollection,order) // => Coloco el objeto que quiero añadir (en addDoc)
-                .then(ans => console.log(ans)) 
+                addDoc(getCollection,order) // => Coloco la coleccion y el objeto que quiero añadir (en addDoc)
+                .then(ans => console.log(ans),order) 
                 .catch(err => console.error(err))
                 .finally(() => {
                     cleanCart()
-                    setDataForm()
+                    setDataForm()    
                 })
-            }    
-        }        
-
-        
-        //Aqui va Actualizar un producto     
-    }
-    // Funcion para detectar los cambios de mi formulario
+                }
+        }
+        //Aqui va Actualizar un producto => Minuto 1:15:00
+     
+    // Funcion para detectar los cambios en mi formulario
     const handleChange = (event) => {
         setDataForm({ 
             // => Declaro el cambio de estado para modificar el valor de los inputs al cambiar el estado
             ...dataForm,
-            [event.target.name]:event.target.value // => Le aplico una prop dinamica
+            [event.target.name] : event.target.value // => Le aplico una prop dinamica
         })
     }
-            
     return(
         // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
         <div className="cartContainer w-100 rounded-4 mt-4">
@@ -73,8 +69,8 @@ const CartContainer = () => {
                         <Card.Img variant="top" className='image rounded-4' src={prodCart.photo} />
                         <Card.Body className='text-start'>
                             <Card.Title className='text-center text-danger'><h2>U$S {prodCart.price}</h2></Card.Title>
-                            <Card.Text className='text-center'><h3><strong>{prodCart.make} {prodCart.model}</strong></h3></Card.Text>
-                            <Card.Text className='text-center'><h3><strong>{prodCart.cant} Unidades</strong></h3></Card.Text>
+                            <Card.Text className='cardDescription text-center'><strong>{prodCart.make} {prodCart.model}</strong></Card.Text>
+                            <Card.Text className='cardDescription text-center'><strong>{prodCart.cant} Unidades</strong></Card.Text>
                             <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
                         </Card.Body>
                         <Card.Footer>
@@ -134,7 +130,7 @@ const CartContainer = () => {
                             </Button>
                         </div>
                         <div className="col-6 p-1">
-                            <Button variant="primary" onClick={() => createOrder()} type="submit" className="formButton rounded-pill">
+                            <Button variant="primary" onClick={(event) => createOrder(event)} type="submit" className="formButton rounded-pill">
                              Generar Orden
                             </Button>
                         </div>
@@ -145,4 +141,5 @@ const CartContainer = () => {
         </div>
     )
 }
+
 export default CartContainer
