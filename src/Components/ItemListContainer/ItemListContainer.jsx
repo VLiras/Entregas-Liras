@@ -1,8 +1,8 @@
 import { useEffect,useState } from "react"
 import {getFirestore, collection, getDocs, query, where} from 'firebase/firestore'
+import { useParams } from "react-router-dom"
 import ItemList from "../ItemList/ItemList"
 import Spinner from "react-bootstrap/Spinner"
-import { useParams } from "react-router-dom"
 
 const ItemListContainer = (props) => {
     const [products,setProducts]=useState([])

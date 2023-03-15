@@ -8,7 +8,7 @@ const NoProduct = () => {
                     <i className="fa-solid fa-face-sad-tear"/><br />
                     No hay productos añadidos al Carrito!
             </h1>
-            <Link to='/'><Button className="btn btn-primary rounded-circle"><i className="fa-solid fa-house"></i></Button></Link>
+            <Link to='/'><Button className="btn btn-primary rounded-circle"><i className="fa-solid fa-house"/></Button></Link>
         </div>
     )
 }

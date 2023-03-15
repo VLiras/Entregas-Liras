@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Toast from 'react-bootstrap/Toast'
-import Button from 'react-bootstrap/Button'
 import { doc, getDoc, getFirestore } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
+import Toast from 'react-bootstrap/Toast'
+import Button from 'react-bootstrap/Button'
 import ItemCount from '../ItemCount/ItemCount'
 import { useCartContext } from '../../Context/CartContext'
 
