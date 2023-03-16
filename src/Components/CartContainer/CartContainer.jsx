@@ -27,9 +27,10 @@ const CartContainer = () => {
     }
     const createOrder = (event) => {
         event.preventDefault() // => Evito que refresque y se borran los datos
-               
+        formComplete()   
             if(dataForm.confirmEmail !== dataForm.email ){
                 console.warn('Los datos son distintos');
+                alert('Los datos son distintos')
             }
             else{
                 // Generando una orden
@@ -37,7 +38,6 @@ const CartContainer = () => {
                 order.buyer = dataForm
                 order.item = cartList.map(({id,make,model,price,cant}) => ({id,make,model,price,cant})),    
                 order.total = totalPrice()
-                console.log(order)
                 // Insertar una orden
                 const db = getFirestore()
                 const getCollection = collection(db,'Orders') // => No existe
