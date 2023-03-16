@@ -7,6 +7,7 @@ import { useCartContext } from "../../Context/CartContext"
 import Total from "../Total/Total"
 import NoProduct from "../NoProduct/NoProduct"
 import Order from "../Order/Order"
+import { Link } from "react-router-dom"
 const CartContainer = () => {
     const {cartList,cleanCart,deleteProduct,totalPrice} = useCartContext()
     const [id,setId] = useState('')
@@ -17,7 +18,6 @@ const CartContainer = () => {
         email:'',
         confirmEmail:''
     })
-    // Clase 13 (Firebase 2) => Minuto 1:02:00
     const formComplete = () => {
         if((dataForm.name)||
         (dataForm.lastName)||
@@ -57,8 +57,6 @@ const CartContainer = () => {
                 })
                 }
         }
-    //Aqui va Actualizar un producto => Minuto 1:15:00
-     
     // Funcion para detectar los cambios en mi formulario
     const handleChange = (event) => {
         setDataForm({ 
@@ -68,36 +66,37 @@ const CartContainer = () => {
         })
     }
     return(
-        // { id != '' && <h2>Nro. de compra es: {id}</h2> } => Arreglar 
-        <div className="cartContainer w-100 rounded-4 mt-4">
+        <div id="cartContainer" className="rounded-4">
             {id !== '' && <Order id={id}/>}
-            <div className="row h-100">
-            {
-                cartList.length === 0 ?
-                <div style={{height:'32rem'}} className="">
-                    <NoProduct/>
-                </div> 
-                : 
-                cartList.map(prodCart => (
-                    <div key={prodCart.id} className="col-3 p-3">
-                    <Card>
-                        <Card.Img variant="top" className='image rounded-4' src={prodCart.photo} />
-                        <Card.Body className='text-start'>
-                            <Card.Title className='text-center text-danger'><h2>U$S {prodCart.price}</h2></Card.Title>
-                            <Card.Text className='cardDescription text-center'><strong>{prodCart.make} {prodCart.model}</strong></Card.Text>
-                            <Card.Text className='cardDescription text-center'><strong>{prodCart.cant} Unidades</strong></Card.Text>
-                            <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <div style={{width:'2.5rem',height:'2.5rem'}} className="center ">
-                                <Button variant='danger' onClick={()=>{deleteProduct(prodCart.id)}} className='delete w-100 h-100 rounded-circle text-center'>X</Button>
-                            </div>
-                        </Card.Footer>  
-                    </Card>
-                    </div>
-                ))
-            }
-            <hr/>
+            <div className="row">
+                {
+                    cartList.length === 0 ?
+                    <div style={{height:'32rem'}}>
+                        <NoProduct/>
+                    </div> 
+                    : 
+                    cartList.map(prodCart => (
+                        <div key={prodCart.id} className="col-3 p-3">
+                        <Card>
+                            <Card.Img variant="top" className='image rounded-4' src={prodCart.photo} />
+                            <Card.Body className='text-start'>
+                                <Card.Title className='text-center text-danger'><h2>U$S {prodCart.price}</h2></Card.Title>
+                                <Card.Text className='cardDescription text-center'><strong>{prodCart.make} {prodCart.model}</strong></Card.Text>
+                                <Card.Text className='cardDescription text-center'><strong>{prodCart.cant} Unidades</strong></Card.Text>
+                                <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                                <div style={{width:'2.5rem',height:'2.5rem'}} className="center ">
+                                    <Button variant='danger' onClick={()=>{deleteProduct(prodCart.id)}} className='delete w-100 h-100 rounded-circle text-center'>X</Button>
+                                </div>
+                            </Card.Footer>  
+                        </Card>
+                        </div>
+                    ))
+                }
+            </div>
+        <hr/>
+            <div>
                 <div className="footer col-12">
                     <div>
                         <Total total={totalPrice}/>
@@ -107,52 +106,50 @@ const CartContainer = () => {
                         <button style={{margin:'0 3%'}} type="button" className="btn btn-primary rounded-pill">Crear Orden</button>
                     </div>
                 </div>
-                <br />
+            </div>
+            <div>
                 <div className='order border rounded-4 bg-dark p-3 w-50 center'>
-                    {
-                        console.log(dataForm.lastName)
-                    }
                         <Form onSubmit={createOrder}>
                             <h2>Datos del Comprador</h2><hr />
-                        <div className="row">
-                            <Form.Group className="mb-3 col-6" controlId="formName">
-                                <Form.Label>Nombre</Form.Label>
-                                <Form.Control type="text" name="name" onChange={handleChange} value={dataForm.name} placeholder="Nombre" required />
-                            </Form.Group>
-                            <Form.Group className="mb-3 col-6" controlId="formLastName">
-                                <Form.Label>Apellido</Form.Label>
-                                <Form.Control type="text" name="lastName" onChange={handleChange} value={dataForm.lastName} placeholder="Apellido" required />
-                            </Form.Group>
-                            <Form.Text className="text-muted col-12">
-                                La informacion contenida en este formulario no sera compartida bajo ningun criterio.
-                            </Form.Text>
-                        </div>
-                        <Form.Group className="mb-3" controlId="formPassword">
-                            <Form.Label>Telefono</Form.Label>
-                            <Form.Control type="tel" name="phone" onChange={handleChange} value={dataForm.phone} className="w-75 center" placeholder="11-1234-5678" required/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" name="email" onChange={handleChange} value={dataForm.email} className="w-75 center" placeholder="nombre@example.com" required/>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="confirmEmail">
-                            <Form.Label>Confimar Email</Form.Label>
-                            <Form.Control type="text" name="confirmEmail" onChange={handleChange} value={dataForm.confirmEmail} className="w-75 center" required/>
-                        </Form.Group><hr/>
-                        <div className="formFooter row">
-                            <div className="col-6 p-1">
-                                <Button variant="danger" type="submit" className="formButton rounded-pill">
-                                Cancelar
-                                </Button>
+                            <div className="row">
+                                <Form.Group className="mb-3 col-6" controlId="formName">
+                                    <Form.Label>Nombre</Form.Label>
+                                    <Form.Control type="text" name="name" onChange={handleChange} value={dataForm.name} placeholder="Nombre" required />
+                                </Form.Group>
+                                <Form.Group className="mb-3 col-6" controlId="formLastName">
+                                    <Form.Label>Apellido</Form.Label>
+                                    <Form.Control type="text" name="lastName" onChange={handleChange} value={dataForm.lastName} placeholder="Apellido" required />
+                                </Form.Group>
+                                <Form.Text className="text-muted col-12">
+                                    La informacion contenida en este formulario no sera compartida bajo ningun criterio.
+                                </Form.Text>
                             </div>
-                            <div className="col-6 p-1">
-                                <Button variant="primary" onClick={(event) => createOrder(event)} type="submit" className="formButton rounded-pill">
-                                Generar Orden
-                                </Button>
+                            <Form.Group className="mb-3" controlId="formPassword">
+                                <Form.Label>Telefono</Form.Label>
+                                <Form.Control type="tel" name="phone" onChange={handleChange} value={dataForm.phone} className="w-75 center" placeholder="11-1234-5678" required/>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="formEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" name="email" onChange={handleChange} value={dataForm.email} className="w-75 center" placeholder="nombre@example.com" required/>
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="confirmEmail">
+                                <Form.Label>Confimar Email</Form.Label>
+                                <Form.Control type="text" name="confirmEmail" onChange={handleChange} value={dataForm.confirmEmail} className="w-75 center" required/>
+                            </Form.Group><hr/>
+                            <div className="formFooter row">
+                                <div className="col-6 p-1">
+                                    <Button variant="danger" type="submit" className="formButton rounded-pill">
+                                    Cancelar
+                                    </Button>
+                                </div>
+                                <div className="col-6 p-1">
+                                    <Button variant="primary" onClick={(event) => createOrder(event)} type="submit" className="formButton rounded-pill">
+                                    Generar Orden
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                </Form>
-            </div>
+                    </Form>
+                </div>
             </div>
         </div>
     )
