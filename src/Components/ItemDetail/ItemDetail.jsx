@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { doc, getDoc, getFirestore } from 'firebase/firestore'
-import { Link } from 'react-router-dom'
-import Toast from 'react-bootstrap/Toast'
-import Button from 'react-bootstrap/Button'
 import ItemCount from '../ItemCount/ItemCount'
 import { useCartContext } from '../../Context/CartContext'
 
 const ItemDetail = () => {
-    const [show, setShow] = useState(false); // => Toast
     const [product,setProduct]=useState({})
     const {idProduct} = useParams()
     const {addToCart,totalPrice} = useCartContext()
     const [loading,setLoading]=useState(true)
-    // const [isCount,setIsCount] = useState(true) => Clase 11
-        
+           
     useEffect(() => {
         const db = getFirestore()
         const queryProd = doc(db,'Products', idProduct)
@@ -26,7 +21,6 @@ const ItemDetail = () => {
     const onAdd = (cant) => {
         addToCart({ ...product, cant })
         totalPrice()
-        // setShow(true)
     }
     return(
         <>
@@ -52,18 +46,6 @@ const ItemDetail = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style={{border:'white solid'}} className="toast position-absolute">
-                <Toast onClose={() => setShow(false)} show={show} delay={5000} bg='dark' autohide>
-                    <Toast.Header>
-                        <strong className="me-auto text-dark">DeepAudio</strong>
-                        <small>11 mins ago</small>
-                    </Toast.Header>
-                    <Toast.Body className='p-2'>
-                        <h3><i className="fa-regular fa-circle-check"/>Se agrego exitosamente al carrito</h3>
-                        <Link to='/cart'><Button className="btn btn-primary rounded-pill w-100">Ir al carrito</Button></Link>
-                    </Toast.Body>
-                </Toast>
             </div>
         </>
     )

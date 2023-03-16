@@ -7,7 +7,6 @@ function Cart(){
     return(
         <div className="cart text-light w-50">
             <i style={{fontSize:'2vw'}} className="fa-solid fa-cart-shopping p-1"/>
-            {/* <label style={{color:'crimson'}}>{cartList.length}</label> */}
             <label style={{color:'crimson'}}>{cartCounter()}</label>
         </div>
     )

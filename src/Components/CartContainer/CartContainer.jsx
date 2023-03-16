@@ -7,7 +7,6 @@ import { useCartContext } from "../../Context/CartContext"
 import Total from "../Total/Total"
 import NoProduct from "../NoProduct/NoProduct"
 import Order from "../Order/Order"
-import { Link } from "react-router-dom"
 const CartContainer = () => {
     const {cartList,cleanCart,deleteProduct,totalPrice} = useCartContext()
     const [id,setId] = useState('')
@@ -19,16 +18,16 @@ const CartContainer = () => {
         confirmEmail:''
     })
     const formComplete = () => {
-        if((dataForm.name)||
-        (dataForm.lastName)||
-        (dataForm.phone)||
-        (dataForm.email)||
-        (dataForm.confirmEmail) === ''
-        ) {console.error('Completa todos los campos')}
+        if((dataForm.name === '')||
+        (dataForm.lastName === '')||
+        (dataForm.phone === '')||
+        (dataForm.email === '')||
+        (dataForm.confirmEmail === '') 
+        ) {alert('Completa todos los campos')}
     }
     const createOrder = (event) => {
         event.preventDefault() // => Evito que refresque y se borran los datos
-        formComplete()
+               
             if(dataForm.confirmEmail !== dataForm.email ){
                 console.warn('Los datos son distintos');
             }
@@ -83,7 +82,6 @@ const CartContainer = () => {
                                 <Card.Title className='text-center text-danger'><h2>U$S {prodCart.price}</h2></Card.Title>
                                 <Card.Text className='cardDescription text-center'><strong>{prodCart.make} {prodCart.model}</strong></Card.Text>
                                 <Card.Text className='cardDescription text-center'><strong>{prodCart.cant} Unidades</strong></Card.Text>
-                                <Card.Text style={{fontSize:'1vw'}} className='text-center stock'>Disponibles: {prodCart.stock = prodCart.stock - prodCart.cant}</Card.Text>
                             </Card.Body>
                             <Card.Footer>
                                 <div style={{width:'2.5rem',height:'2.5rem'}} className="center ">

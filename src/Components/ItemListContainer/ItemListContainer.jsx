@@ -33,7 +33,6 @@ const ItemListContainer = (props) => {
                 products.map(product => 
                 <>
                     <ItemList key={product.id} photo={product.photo} id={product.id} model={product.model} make={product.make} price={product.price} stock={product.stock}></ItemList>
-                    {/* <button onClick={()=>{}}>Agregar Producto</button> */}
                 </>)
             }
             </div>
