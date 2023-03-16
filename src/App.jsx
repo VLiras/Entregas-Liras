@@ -5,7 +5,6 @@ import DetailContainer from './Components/ItemDetailContainer/ItemDetailContaine
 import CartContainer from './Components/CartContainer/CartContainer'
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer.jsx'
 import { CartProvider} from './Context/CartContext'
-import Form from './Components/Form/Form'
 import './App.css'
 import './Tools.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -23,7 +22,6 @@ function App() {
           <Route path='/:idCategory'element={<ItemListContainer/>}/>
           <Route path='/detalle/:idProduct' element={<DetailContainer/>}/>
           <Route path='/cart'element={<CartContainer/>}/>
-          <Route path='/cart/order' element={<Form/>}/>
           <Route path='*'element={<Navigate to='/'/>}/>
         </Routes>
     </CartProvider>
